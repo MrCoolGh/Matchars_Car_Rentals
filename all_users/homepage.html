@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Matchars Car Rentals</title>
+    <link rel="icon" type="image/png" href="../img/about-img.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Ubuntu:wght@500;700&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../assets/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <!-- AlpineJS for interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #e44525;
+            --background-light: #f8f9fa;
+            --background-dark: #0f172a;
+            --card-bg-light: #ffffff;
+            --card-bg-dark: #1e293b;
+            --input-bg-dark: #2d3748;
+            --text-light: #212529;
+            --text-dark: #e2e8f0;
+            --border-light: #dee2e6;
+            --border-dark: #4a5568;
+            --warning-color: #f59e0b;
+            --info-color: #38bdf8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body.dark {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        .dark .bg-light {
+            background-color: var(--background-dark) !important;
+        }
+
+        .dark .bg-white {
+            background-color: var(--card-bg-dark) !important;
+        }
+
+        .dark .text-dark {
+            color: var(--text-dark) !important;
+        }
+
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark p, .dark .dropdown-item, .dark label, .dark .form-control, .dark .form-select, .dark .form-check-label {
+            color: var(--text-dark);
+        }
+        .dark .service-item, .dark .team-item, .dark .accordion-item, .dark .testimonial-item, .dark .about-img {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-dark);
+        }
+        .dark .accordion-button {
+            background-color: var(--card-bg-dark);
+            color: var(--text-dark);
+        }
+        .dark .accordion-button::after {
+            filter: invert(1) brightness(100);
+        }
+        .dark .accordion-body {
+            background-color: #1a2436;
+        }
+
+        .dark .form-control, .dark .form-select {
+            background-color: var(--input-bg-dark);
+            border-color: var(--border-dark);
+            color: var(--text-dark);
+        }
+        .dark .form-control::placeholder {
+            color: #94a3b8;
+        }
+        .dark .form-control:focus, .dark .form-select:focus {
+            background-color: var(--input-bg-dark);
+            color: var(--text-dark);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
+        }
+        .dark input[type="date"]::-webkit-calendar-picker-indicator,
+        .dark input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+
+        .car-search-section {
+            background: var(--background-light);
+            padding: 48px 0 16px 0;
+            text-align: center;
+        }
+        .dark .car-search-section {
+            background: var(--background-dark);
+        }
+        .car-search-title {
+            font-size: 2.8rem;
+            font-family: 'Nunito', Arial, sans-serif;
+            color: #232946;
+            margin-bottom: 24px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        .dark .car-search-title {
+            color: #e2e8f0;
+        }
+        .car-search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+            background: #ebeff5;
+            border: 1px solid #fff;
+            box-shadow: 0 8px 24px rgba(60,72,94,0.08);
+            border-radius: 12px;
+            padding: 0;
+        }
+        .dark .car-search-form {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .car-search-input {
+            flex: 1 1 0%;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 12px 0 0 12px;
+            font-size: 1rem;
+            outline: none;
+            color: #232946;
+            background: transparent;
+            height: 48px;
+        }
+        .dark .car-search-input {
+            color: #e2e8f0;
+        }
+        .car-search-input::placeholder {
+            color: #676c7e;
+        }
+        .dark .car-search-input::placeholder {
+            color: #94a3b8;
+        }
+        .car-search-btn {
+            width: 120px;
+            height: 48px;
+            border: none;
+            border-radius: 0 12px 12px 0;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .featured-car-card {
+            background-color: var(--card-bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .dark .featured-car-card {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-dark);
+        }
+        .card-banner {
+            height: 180px;
+            border-radius: 12px;
+            margin: 1rem 1rem 0 1rem;
+            overflow: hidden;
+        }
+        .card-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .year {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .card-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+        .card-list-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+        }
+        .card-list-item i {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        .card-price-wrapper {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dark .card-price-wrapper {
+            border-top-color: var(--border-dark);
+        }
+        .card-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            background-color: var(--card-bg-light);
+            color: var(--text-light);
+            border: none;
+            border-radius: 0.5rem;
+        }
+        .dark .modal-content {
+            background-color: var(--card-bg-dark);
+            color: var(--text-dark);
+        }
+        .dark .modal-header, .dark .modal-footer {
+            border-color: var(--border-dark);
+        }
+        .dark .btn-close {
+            filter: invert(1) grayscale(100) brightness(200%);
+        }
+        .dark .modal-footer .btn-secondary {
+            background: transparent;
+            border: none;
+            color: var(--warning-color);
+            font-weight: 500;
+        }
+        .dark .modal-footer .btn-warning {
+            background: transparent;
+            border: none;
+            color: var(--warning-color);
+            font-weight: 500;
+        }
+        .dark .modal-footer .btn-info {
+            background: transparent;
+            border: none;
+            color: var(--info-color);
+            font-weight: 500;
+        }
+        .dark .modal-footer .btn-success {
+            background-color: #22c55e;
+            border-color: #22c55e;
+            color: white;
+        }
+        .modal-body textarea.form-control {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+
+        /* Pure Alpine-based Collapsible Section */
+        .collapsible-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            background-color: #f8f9fa;
+        }
+        .dark .collapsible-trigger {
+            background-color: #2d3748;
+        }
+        .collapsible-content {
+            padding: 1rem;
+            border-top: 1px solid var(--border-light);
+        }
+        .dark .collapsible-content {
+            border-top-color: var(--border-dark);
+        }
+        .chevron-icon {
+            transition: transform 0.3s ease;
+        }
+        .chevron-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Navbar Style */
+        .liquid-glass {
+            /* Light Mode Glass Effect */
+            background-color: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        body.dark .liquid-glass {
+            /* Dark Mode Glass Effect */
+            background-color: rgba(30, 41, 59, 0.25) !important;
+            border-bottom: 1px solid rgba(74, 85, 104, 0.3);
+        }
+
+        /* Navbar Text & Icon Colors */
+        body:not(.dark) #navbar-container .navbar-brand h1,
+        body:not(.dark) #navbar-container .navbar-nav .nav-link,
+        body:not(.dark) #navbar-container .btn-dark-mode-toggle svg {
+            color: #212529 !important; /* Always use dark text in light mode */
+        }
+        body:not(.dark) #navbar-container .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        body.dark #navbar-container .navbar-brand h1,
+        body.dark #navbar-container .navbar-nav .nav-link,
+        body.dark #navbar-container .btn-dark-mode-toggle svg {
+            color: #e2e8f0 !important; /* Always use light text in dark mode */
+        }
+        body.dark #navbar-container .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(226, 232, 240, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+
+        /* Avatar Dropdown Menu */
+        .navbar .dropdown-menu {
+            border: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 0.5rem;
+            margin-top: 10px !important;
+        }
+
+        body:not(.dark) .navbar .dropdown-menu {
+            background-color: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        body:not(.dark) .navbar .dropdown-menu .dropdown-item {
+            color: var(--text-light);
+        }
+        body:not(.dark) .navbar .dropdown-menu .dropdown-item:hover,
+        body:not(.dark) .navbar .dropdown-menu .dropdown-item:focus {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark .navbar .dropdown-menu {
+            background-color: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        body.dark .navbar .dropdown-menu .dropdown-item:hover,
+        body.dark .navbar .dropdown-menu .dropdown-item:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Offcanvas (Right Side Navbar) Styles */
+        @media (max-width: 991.98px) {
+            .offcanvas-navbar {
+                position: fixed;
+                top: 0;
+                right: -260px;
+                width: 150px;
+                max-width: 80vw;
+                height: 100vh;
+                z-index: 1055;
+                transition: right 0.35s cubic-bezier(.4,0,.2,1);
+                display: flex;
+                flex-direction: column;
+                padding: 1.5rem;
+                /* MODIFIED: Default text color for light mode */
+                color: var(--text-light) !important;
+            }
+            /* MODIFIED: Text color for dark mode */
+            body.dark .offcanvas-navbar {
+                color: var(--text-dark) !important;
+            }
+            .offcanvas-navbar.show {
+                right: 0;
+            }
+            .offcanvas-navbar .offcanvas-header {
+                display: flex;
+                justify-content: flex-end;
+                margin-bottom: 1.5rem;
+                padding: 0;
+            }
+            .offcanvas-navbar .offcanvas-close-btn {
+                background: none;
+                border: none;
+                font-size: 2rem;
+                line-height: 1;
+                color: inherit;
+                opacity: 0.8;
+                cursor: pointer;
+            }
+            /* MODIFIED: Ensure links inherit color */
+            .offcanvas-navbar .nav-link, .offcanvas-navbar .dropdown-item {
+                font-size: 1.1rem;
+                padding: 0.8rem 0;
+                color: inherit !important;
+            }
+            .offcanvas-navbar .dropdown-menu {
+                position: static !important;
+                float: none;
+                background: none !important;
+                border: none;
+                box-shadow: none;
+                padding-left: 1rem;
+                margin-top: 0 !important;
+            }
+            .offcanvas-navbar .dropdown-toggle::after {
+                display: none; /* Hide dropdown arrow */
+            }
+        }
+    </style>
+</head>
+
+<body x-data="{ isDarkMode: localStorage.getItem('isDarkMode') === 'true', showMobileNav: false }" @dark-mode-toggle.window="isDarkMode = $event.detail" :class="isDarkMode ? 'dark' : ''" x-init="$watch('isDarkMode', val => localStorage.setItem('isDarkMode', val))">
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top liquid-glass" id="navbar-container">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg py-0" x-data="navbarAuth()">
+            <a href="homepage.html" class="navbar-brand">
+                <h1 class="m-0">Matchars</h1>
+            </a>
+            <!-- Navbar Toggler for mobile -->
+            <button type="button" class="navbar-toggler d-lg-none ms-auto me-0" @click="showMobileNav = true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Desktop Navbar -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto align-items-center">
+                    <a href="#hero-header" class="nav-item nav-link active">Home</a>
+                    <a href="#about" class="nav-item nav-link">About</a>
+                    <a href="#contact" class="nav-item nav-link">Contact</a>
+
+                    <!-- Dark Mode Toggle -->
+                    <button @click="$dispatch('dark-mode-toggle', !isDarkMode)" class="btn btn-dark-mode-toggle nav-item" style="background: transparent; border: none; padding: 0.5rem 1rem;">
+                        <svg x-show="isDarkMode" style="width: 24px; height: 24px;" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.75 3.412a.818.818 0 01-.07.917 6.332 6.332 0 00-1.4 3.971c0 3.564 2.98 6.494 6.706 6.494a6.86 6.86 0 002.856-.617.818.818 0 011.1 1.047C19.593 18.614 16.218 21 12.283 21 7.18 21 3 16.973 3 11.956c0-4.563 3.46-8.31 7.925-8.948a.818.818 0 01.826.404z"></path>
+                        </svg>
+                        <svg x-show="!isDarkMode" style="width: 24px; height: 24px;" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+
+                    <!-- User Not Logged In -->
+                    <template x-if="!isLoggedIn">
+                        <div class="d-flex">
+                            <a href="../auth/sign_in.html" class="nav-item nav-link">Login</a>
+                            <a href="../auth/sign_up.html" class="nav-item nav-link">Register</a>
+                        </div>
+                    </template>
+
+                    <!-- User Logged In -->
+                    <template x-if="isLoggedIn">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                                <img :src="userAvatar" :alt="userName" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                            </a>
+                            <div class="dropdown-menu mt-2">
+
+                                <div class="dropdown-divider"></div>
+                                <a :href="dashboardLink" class="dropdown-item" x-text="dashboardText"></a>
+                                <a href="#" @click.prevent="logout" class="dropdown-item">Log out</a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- Offcanvas Mobile Nav -->
+<div class="offcanvas-navbar d-lg-none liquid-glass" :class="{ 'show': showMobileNav }" @click.outside="showMobileNav = false" x-trap.noscroll.inert="showMobileNav" x-show="showMobileNav">
+    <div class="offcanvas-header">
+        <button class="offcanvas-close-btn" @click="showMobileNav = false" aria-label="Close">&times;</button>
+    </div>
+    <div class="navbar-nav ms-auto align-items-stretch p-3" x-data="navbarAuth()">
+
+        <!-- User Not Logged In - Mobile -->
+        <template x-if="!isLoggedIn">
+            <div>
+                <a href="../auth/sign_in.html" class="nav-item nav-link" @click="showMobileNav = false">Login</a>
+                <a href="../auth/sign_up.html" class="nav-item nav-link" @click="showMobileNav = false">Register</a>
+            </div>
+        </template>
+
+        <!-- User Logged In - Mobile -->
+        <template x-if="isLoggedIn">
+            <div x-data="{ open: false }">
+                <a href="#" @click.prevent="open = !open" class="nav-link dropdown-toggle d-flex align-items-center">
+                    <img :src="userAvatar" :alt="userName" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+
+                </a>
+                <div x-show="open" @click.away="open = false" class="dropdown-menu show">
+                    <a :href="dashboardLink" class="dropdown-item" @click="showMobileNav = false" x-text="dashboardText"></a>
+                    <a href="#" @click.prevent="logout(); showMobileNav = false" class="dropdown-item">Log out</a>
+                </div>
+            </div>
+        </template>
+
+        <hr :class="isDarkMode ? 'border-secondary' : 'border-light'">
+
+        <a href="#hero-header" class="nav-item nav-link" @click="showMobileNav = false">Home</a>
+        <a href="#about" class="nav-item nav-link" @click="showMobileNav = false">About</a>
+        <a href="#contact" class="nav-item nav-link" @click="showMobileNav = false">Contact</a>
+
+
+        <hr :class="isDarkMode ? 'border-secondary' : 'border-light'">
+
+        <button @click="$dispatch('dark-mode-toggle', !isDarkMode)" class="btn btn-dark-mode-toggle nav-item text-start d-flex align-items-center" style="background: transparent; border: none; padding: 0.8rem 0;">
+            <svg x-show="isDarkMode" style="width: 24px; height: 24px;" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M11.75 3.412a.818.818 0 01-.07.917 6.332 6.332 0 00-1.4 3.971c0 3.564 2.98 6.494 6.706 6.494a6.86 6.86 0 002.856-.617.818.818 0 011.1 1.047C19.593 18.614 16.218 21 12.283 21 7.18 21 3 16.973 3 11.956c0-4.563 3.46-8.31 7.925-8.948a.818.818 0 01.826.404z"></path>
+            </svg>
+            <svg x-show="!isDarkMode" style="width: 24px; height: 24px;" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+            </svg>
+        </button>
+    </div>
+</div>
+<!-- Navbar End -->
+
+<!-- Authentication & User Management Alpine Component -->
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('navbarAuth', () => ({
+            isLoggedIn: false,
+            userAvatar: '../img/team-4.jpg', // Default avatar
+            userName: 'Guest User',
+            dashboardLink: '#',
+            dashboardText: 'Dashboard',
+
+            init() {
+                // Get current user from localStorage
+                const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+                // Check if user is logged in
+                this.isLoggedIn = !!currentUser.id;
+
+                if (this.isLoggedIn) {
+                    // Set user info
+                    this.userName = `${currentUser.firstName} ${currentUser.lastName}`;
+
+                    // Set avatar if available, otherwise use default
+                    if (currentUser.avatar && currentUser.avatar !== 'null' && currentUser.avatar !== 'undefined') {
+                        this.userAvatar = currentUser.avatar;
+                    }
+
+                    // Set dashboard link based on role
+                    switch(currentUser.role) {
+                        case 'admin':
+                            this.dashboardLink = '../admin/admin_dashboard.html';
+                            this.dashboardText = 'Dashboard';
+                            break;
+                        case 'manager':
+                            this.dashboardLink = '../manager/manager_dashboard.html';
+                            this.dashboardText = 'Dashboard';
+                            break;
+                        case 'customer':
+                            this.dashboardLink = '../customer/customer_dashboard.html';
+                            this.dashboardText = 'Dashboard';
+                            break;
+                        default:
+                            this.dashboardLink = '#';
+                            this.dashboardText = 'Dashboard';
+                    }
+                }
+            },
+
+            logout() {
+                // Remove user data from localStorage
+                localStorage.removeItem('currentUser');
+
+                // Redirect to home page
+                window.location.href = '../public/index.html';
+            }
+        }));
+    });
+</script>
+
+
+<!-- Hero Start -->
+<div class="container-fluid pt-5 bg-primary hero-header mb-5" id="hero-header">
+    <div class="container pt-5">
+        <div class="row g-5 pt-5">
+            <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
+
+                <h1 class="display-4 text-white mb-4 animated slideInRight">Find the Perfect Ride for Every Trip</h1>
+                <p class="text-white mb-4 animated slideInRight">Explore our wide range of reliable and affordable cars ready for any trip — whether it's a
+                    weekend getaway, daily commute, or business travel. Book in just a few clicks and hit the road with ease!</p>
+                <a href="#available-cars" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Explore Cars</a>
+            </div>
+            <div class="col-lg-6 align-self-end text-center text-lg-end">
+                <img class="img-fluid" src="../img/hero-img.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+
+
+<!-- Car Rental App Start -->
+<div x-data="carRentalApp()">
+    <main class="w-full pb-8" id="available-cars" x-data="{
+        cars: [],
+        searchTerm: '',
+        isLoading: true,
+        isDarkMode: localStorage.getItem('darkMode') === 'true',
+
+        init() {
+            this.fetchCars();
+        },
+
+        async fetchCars() {
+            try {
+                this.isLoading = true;
+                const response = await fetch('/api/cars');
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch cars');
+                }
+
+                const data = await response.json();
+
+                // Transform data to match our component structure if needed
+                this.cars = data.map(car => ({
+                    id: car.id,
+                    name: car.name,
+                    price: car.price,
+                    year: car.year,
+                    transmission: car.transmission,
+                    fuel: car.fuel,
+                    seats: car.seats,
+                    mileage: car.mileage,
+                    description: car.description,
+                    image: car.image,
+                    gallery: car.gallery || []
+                }));
+            } catch (error) {
+                console.error('Error fetching cars:', error);
+                // You might want to add some error display here
+            } finally {
+                this.isLoading = false;
+            }
+        },
+
+        get filteredCars() {
+            if (!this.searchTerm) return this.cars;
+
+            const searchLower = this.searchTerm.toLowerCase();
+            return this.cars.filter(car =>
+                car.name.toLowerCase().includes(searchLower) ||
+                car.description.toLowerCase().includes(searchLower) ||
+                car.transmission.toLowerCase().includes(searchLower) ||
+                car.fuel.toLowerCase().includes(searchLower)
+            );
+        },
+
+        openBookingModal(car) {
+            // ======= ADDED: submission-check flow =======
+            // Save the car temporarily so the external script/modal can use it
+            try {
+                window.__pendingBookingCar = car;
+                // call global helper (defined below) to check submission and show modal
+                if (typeof window.checkSubmissionAndShowModal === 'function') {
+                    window.checkSubmissionAndShowModal();
+                } else {
+                    // Fallback: dispatch the original event if helper not available
+                    window.dispatchEvent(new CustomEvent('open-booking-modal', { detail: car }));
+                }
+            } catch (err) {
+                console.error('Error while initiating booking check:', err);
+                // fallback to original behavior
+                window.dispatchEvent(new CustomEvent('open-booking-modal', { detail: car }));
+            }
+        }
+    }">
+        <!-- Search Section -->
+        <section class="car-search-section">
+            <div class="container">
+                <h1 class="car-search-title">Available Cars</h1>
+                <div class="car-search-form">
+                    <input type="text" x-model.debounce.300ms="searchTerm" class="car-search-input" placeholder="Search for cars by name or feature...">
+                    <button type="button" class="car-search-btn">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div class="container py-5" x-show="isLoading">
+            <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Cars Found State -->
+        <div class="container py-5" x-show="!isLoading && filteredCars.length === 0">
+            <div class="alert alert-info text-center">
+                <h4 class="alert-heading">No cars found</h4>
+                <p class="mb-0" x-show="searchTerm">No cars match your search criteria. Try adjusting your search terms.</p>
+                <p class="mb-0" x-show="!searchTerm">There are currently no cars available in our fleet.</p>
+            </div>
+        </div>
+
+        <!-- Cars Grid -->
+        <div class="container py-5" x-data="{ carPage: 1, carsPerPage: 9 }" x-show="!isLoading && filteredCars.length > 0">
+            <div class="row g-4">
+                <template x-for="car in filteredCars.slice((carPage - 1) * carsPerPage, carPage * carsPerPage)" :key="car.id">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="featured-car-card">
+                            <figure class="card-banner">
+                                <img :src="car.image" :alt="car.name" loading="lazy">
+                            </figure>
+                            <!-- Gallery -->
+                            <div class="p-2 d-flex flex-wrap gap-2 justify-content-center" :class="isDarkMode ? 'bg-dark' : 'bg-light'">
+                                <template x-for="img in car.gallery" :key="img">
+                                    <img @click="car.image = img"
+                                         :class="car.image === img ? 'border-2 border-primary' : 'opacity-70 hover-opacity-100'"
+                                         :src="img" class="object-cover" style="height: 48px; width: 48px; cursor: pointer; border-radius: 12px;"/>
+                                </template>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title-wrapper">
+                                    <h3 class="card-title text-dark" x-text="car.name"></h3>
+                                </div>
+                                <ul class="card-list">
+                                    <li class="card-list-item"><i class="fas fa-users"></i><span x-text="car.seats + ' Seaters'"></span></li>
+                                    <li class="card-list-item"><i class="fas fa-gas-pump"></i><span x-text="car.fuel"></span></li>
+                                    <li class="card-list-item">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span style="color: #16a34a; font-weight: 500;">Available for bookings</span>
+                                    </li>
+                                    <li class="card-list-item"><i class="fas fa-car-side"></i><span x-text="car.transmission"></span></li>
+                                </ul>
+
+                                <!-- Description Popup (REPLACED previous collapsible; nothing else changed) -->
+                                <div x-data="{ showDesc:false }" class="mt-4">
+                                    <button type="button"
+                                            @click="showDesc = true"
+                                            class="btn w-100 d-flex align-items-center justify-content-between px-3 py-2"
+                                            :class="isDarkMode ? 'btn-outline-light' : 'btn-outline-secondary'">
+                                <span class="fw-medium">
+                                    <i class="fas fa-info-circle me-2"></i>Description
+                                </span>
+                                        <i class="fas fa-up-right-from-square"></i>
+                                    </button>
+
+                                    <!-- Modal Overlay -->
+                                    <div x-show="showDesc"
+                                         x-transition.opacity
+                                         class="position-fixed top-0 start-0 w-100 h-100"
+                                         style="z-index: 1050; background: rgba(0,0,0,0.55); display:none;"
+                                         @click.self="showDesc=false">
+                                        <!-- Modal Dialog -->
+                                        <div x-show="showDesc"
+                                             x-transition
+                                             class="position-absolute top-50 start-50 translate-middle"
+                                             style="max-width: 520px; width: 100%;">
+                                            <div class="modal-content border-0 shadow-lg"
+                                                 :class="isDarkMode ? 'bg-dark text-light' : 'bg-white text-dark'"
+                                                 style="border-radius: 1rem; overflow: hidden;">
+                                                <div class="modal-header d-flex align-items-start gap-2"
+                                                     :class="isDarkMode ? 'border-secondary' : 'border-light'">
+                                                    <h5 class="modal-title m-0" x-text="car.name + ' Description'"></h5>
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-outline-danger ms-auto"
+                                                            @click="showDesc=false">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" style="max-height: 360px; overflow-y: auto;">
+                                                    <p class="mb-0" x-text="car.description"></p>
+                                                </div>
+                                                <div class="modal-footer"
+                                                     :class="isDarkMode ? 'border-secondary' : 'border-light'">
+                                                    <button type="button"
+                                                            class="btn btn-primary"
+                                                            @click="showDesc=false">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END Description Popup -->
+
+                                <!-- (ORIGINAL COLLAPSIBLE REMOVED & REPLACED ABOVE; NO OTHER CHANGES) -->
+
+                                <div class="card-price-wrapper">
+                                    <!-- Implementation: Push contact text to left, call button next, rent now to right -->
+                                    <div class="d-flex align-items-center justify-content-between" style="margin-bottom: 16px;">
+                                        <p class="card-price text-dark mb-0" style="flex:1; text-align:left;">
+                                            <strong>Contact us for the best deal on this vehicle</strong>
+                                        </p>
+                                        <span x-data="{ showCallOptions: false }">
+                                    <button
+                                            class="btn btn-success d-flex align-items-center justify-content-center"
+                                            style="width:32px; height:32px; border-radius:50%; font-size:16px; padding:0; margin-left:12px;"
+                                            @click="showCallOptions = true"
+                                            type="button"
+                                            aria-label="Call"
+                                    >
+                                        <i class="fas fa-phone-alt"></i>
+                                    </button>
+                                            <!-- Call Options Modal -->
+                                    <div x-show="showCallOptions"
+                                         x-transition.opacity
+                                         class="position-fixed top-0 start-0 w-100 h-100"
+                                         style="z-index: 1060; background: rgba(0,0,0,0.55); display:none;"
+                                         @click.self="showCallOptions=false">
+                                        <div x-show="showCallOptions"
+                                             x-transition
+                                             class="position-absolute top-50 start-50 translate-middle"
+                                             style="max-width: 350px; width: 100%;">
+                                            <div class="modal-content border-0 shadow-lg bg-white text-dark"
+                                                 style="border-radius: 1rem; overflow: hidden;">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title m-0">Choose a number to call</h5>
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-outline-danger ms-auto"
+                                                            @click="showCallOptions=false">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <button type="button" class="btn btn-outline-success w-100 mb-2" @click="window.location.href='tel:+2332445016493'; showCallOptions=false;">
+                                                        <i class="fas fa-phone-alt me-2"></i>
+                                                        +233 244 501 6493
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-success w-100" @click="window.location.href='tel:+233244201170'; showCallOptions=false;">
+                                                        <i class="fas fa-phone-alt me-2"></i>
+                                                        +233 244 201 170
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" @click="showCallOptions=false">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                                        <!-- Rent now button styled as image and reduced in size -->
+                                        <button @click="openBookingModal(car)"
+                                                style="background-color: #e74c3c; color: #fff; border: none; border-radius: 16px; padding: 6px 18px; font-size: 16px; font-weight: 500; margin-left: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); cursor: pointer; height:36px; display:inline-block;"
+                                        >
+                                            Rent now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <!-- Pagination Buttons: Only show if more than 9 cars -->
+            <div class="d-flex justify-content-center mt-4"
+                 x-show="filteredCars.length > carsPerPage">
+                <!-- Prev Button: Only show if not on first page -->
+                <button
+                        class="btn btn-outline-secondary mx-2"
+                        @click="if(carPage > 1) carPage = carPage - 1"
+                        type="button"
+                        x-show="carPage > 1"
+                        aria-label="Previous"
+                        style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;"
+                >
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <!-- Next Button: Only show if there are more cars to show -->
+                <button
+                        class="btn btn-outline-secondary mx-2"
+                        @click="carPage = carPage + 1"
+                        type="button"
+                        x-show="filteredCars.length > carPage * carsPerPage"
+                        aria-label="Next"
+                        style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;"
+                >
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Custom styles for the submission-check popup (no bootstrap) -->
+    <style>
+        /* Container styles for light/dark variants */
+        #submissionCheckContent {
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 420px;
+            width: 95%;
+            text-align: center;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        /* Force content children to inherit the container color so inline colors won't hide text */
+        #submissionCheckContent * {
+            color: inherit !important;
+        }
+
+        /* Light and dark mode helper classes (applied by JS) */
+        #submissionCheckContent.sc-light {
+            background: #ffffff;
+            color: #111111;
+        }
+        #submissionCheckContent.sc-dark {
+            background: #0a2540; /* dark-blue */
+            color: #ffffff;
+        }
+
+        /* Buttons for the modal — custom classes (no bootstrap) */
+        .sc-btn {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .sc-cancel {
+            background: transparent;
+            color: inherit;
+            padding: 6px 10px;
+            border-radius: 6px;
+            text-decoration: underline;
+            opacity: 0.95;
+        }
+
+        .sc-primary {
+            background: #0d6efd;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .sc-warning {
+            background: #f59e0b;
+            color: #000;
+            border-radius: 8px;
+        }
+
+        .sc-info {
+            background: #06b6d4;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        /* hidden helper */
+        .sc-hidden { display: none !important; }
+    </style>
+
+    <!-- ======= SUBMISSION CHECK MODAL (UPDATED FOR DARK/LIGHT MODE, NO BOOTSTRAP) ======= -->
+    <div id="submissionCheckModal" style="display:none; position:fixed; inset:0; z-index:12000; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+        <div id="submissionCheckContent" class="sc-light">
+            <div id="submissionCheckBody" style="min-height:120px; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                <!-- Content gets injected by script -->
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="spinner-border text-primary" role="status" id="submissionSpinner" style="width:2rem; height:2rem;"></div>
+                    <div><strong>Checking your submission status...</strong></div>
+                </div>
+            </div>
+            <div style="margin-top:16px; display:flex; justify-content:center; gap:12px;">
+                <!-- Buttons use custom classes (no bootstrap) -->
+                <button id="submissionCancelBtn" class="sc-btn sc-cancel sc-hidden">Cancel</button>
+                <button id="submissionActionBtn" class="sc-btn sc-primary sc-hidden">Action</button>
+                <button id="submissionUpdateBtn" class="sc-btn sc-info sc-hidden">Update Form</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel" x-text="`Book ${selectedCar ? selectedCar.name : ''}`"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img :src="selectedCar ? selectedCar.image : ''" class="w-100 rounded-lg mb-4" style="height: 200px; object-fit: cover;">
+                    <!-- Payment Note Updated -->
+                    <div style="background:#fffbe5; color:#a16207; border-radius:6px; padding:12px; margin-bottom:18px; border:1px solid #ffe066; font-weight:600; font-size:1.07em;">
+                        <i class="fas fa-exclamation-triangle" style="margin-right:7px;"></i>
+                        Please note: To secure your car booking, an advance payment of 50% of the total amount is required.
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Pickup Location:</label>
+                            <select x-model="bookingDetails.pickupLocation" class="form-select">
+                                <option value="office">Our Office</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Drop-off Location:</label>
+                            <select x-model="bookingDetails.dropoffLocation" class="form-select">
+                                <option value="office">Our Office</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-12" x-show="bookingDetails.pickupLocation === 'other'" x-collapse>
+                            <label class="form-label">Custom Pickup Location:</label>
+                            <textarea x-model="bookingDetails.customPickupLocation" rows="2" class="form-control" placeholder="Enter full address"></textarea>
+                        </div>
+                        <div class="col-12" x-show="bookingDetails.dropoffLocation === 'other'" x-collapse>
+                            <label class="form-label">Custom Drop-off Location:</label>
+                            <textarea x-model="bookingDetails.customDropoffLocation" rows="2" class="form-control" placeholder="Enter full address"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pickup Date:</label>
+                            <input x-model="bookingDetails.pickupDate" type="date" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pickup Time:</label>
+                            <input x-model="bookingDetails.pickupTime" type="time" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Drop-off Date:</label>
+                            <input x-model="bookingDetails.dropoffDate" type="date" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Drop-off Time:</label>
+                            <input x-model="bookingDetails.dropoffTime" type="time" class="form-control">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Note (optional):</label>
+                            <textarea x-model="bookingDetails.note" rows="3" class="form-control" placeholder="Any special requests?"></textarea>
+                        </div>
+                        <div class="col-12 mt-4 p-3 rounded border" :class="isDarkMode ? 'border-dark' : 'border-light'">
+                            <div class="d-flex justify-content-between fs-5"><span class="fw-medium">Total Days:</span> <span class="fw-bold text-primary" x-text="totalDays()"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-info" @click="proceedToConfirmation()">Review Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true" x-data="{ isBookingLoading: false }">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Confirm Your Booking</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img :src="selectedCar ? selectedCar.image : ''" class="rounded" style="width: 120px; height: 80px; object-fit: cover;">
+                        <div>
+                            <h4 class="h5" x-text="selectedCar ? selectedCar.name : ''"></h4>
+                            <p class="mb-0" x-text="selectedCar ? `${selectedCar.year} - ${selectedCar.transmission}` : ''"></p>
+                        </div>
+                    </div>
+                    <!-- Payment Note Updated -->
+                    <div style="background:#fffbe5; color:#a16207; border-radius:6px; padding:12px; margin-bottom:18px; border:1px solid #ffe066; font-weight:600; font-size:1.07em;">
+                        <i class="fas fa-exclamation-triangle" style="margin-right:7px;"></i>
+                        Please note: To secure your car booking, an advance payment of 50% of the total amount is required.
+                    </div>
+                    <div class="p-3 border rounded mb-3" :class="isDarkMode ? 'border-dark' : 'border-light'">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <p class="fw-bold mb-0">Pickup:</p>
+                                <p class="mb-1" x-text="formatDateTime(computedPickupDateTime)"></p>
+                                <p class="text-muted small mb-0" x-text="bookingDetails.pickupLocation === 'office' ? 'Our Office' : bookingDetails.customPickupLocation"></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="fw-bold mb-0">Drop-off:</p>
+                                <p class="mb-1" x-text="formatDateTime(computedDropoffDateTime)"></p>
+                                <p class="text-muted small mb-0" x-text="bookingDetails.dropoffLocation === 'office' ? 'Our Office' : bookingDetails.customDropoffLocation"></p>
+                            </div>
+                        </div>
+                        <div x-show="bookingDetails.note.trim()" x-collapse class="mt-2">
+                            <p class="fw-bold mb-1">Your Note:</p>
+                            <p class="text-muted small fst-italic mb-0" style="word-wrap: break-word;" x-text="bookingDetails.note"></p>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded" :class="isDarkMode ? 'border-dark bg-dark' : 'bg-light'">
+                        <div class="d-flex justify-content-between fs-6"><span class="fw-medium">Total Days:</span><span class="fw-bold text-primary" x-text="totalDays()"></span></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" @click="confirmationModalInstance.hide(); bookingModalInstance.show();">Edit</button>
+                    <button type="button"
+                            class="btn btn-success"
+                            @click="
+                            isBookingLoading = true;
+                            Promise.resolve(finalizeBooking()).finally(() => isBookingLoading = false);
+                        "
+                            :disabled="isBookingLoading"
+                    >
+                        <template x-if="!isBookingLoading">
+                            <span>Confirm & Book</span>
+                        </template>
+                        <template x-if="isBookingLoading">
+                            <span>
+                                <span class="spinner-border spinner-border-sm align-middle me-1"></span>
+                                Booking...
+                            </span>
+                        </template>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result (Success/Error) Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-body p-4">
+                    <div x-show="modalTitle.includes('Successful')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-success mx-auto" style="width: 100px; height: 100px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h4 class="h4 mt-3" x-text="modalTitle"></h4>
+                        <p class="mt-2" x-text="modalText"></p>
+                        <button data-bs-dismiss="modal" class="btn btn-success mt-3">Close</button>
+                    </div>
+                    <div x-show="modalTitle.includes('Error')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-danger mx-auto" style="width: 100px; height: 100px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h4 class="h4 mt-3" x-text="modalTitle"></h4>
+                        <p class="mt-2" x-text="modalText"></p>
+                        <button data-bs-dismiss="modal" class="btn btn-danger mt-3">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Car Rental App End -->
+<script>
+    (function() {
+        const modal = document.getElementById('submissionCheckModal');
+        const content = document.getElementById('submissionCheckContent'); // container to style
+        const body = document.getElementById('submissionCheckBody');
+        const spinner = document.getElementById('submissionSpinner');
+        const actionBtn = document.getElementById('submissionActionBtn');
+        const cancelBtn = document.getElementById('submissionCancelBtn');
+        const updateBtn = document.getElementById('submissionUpdateBtn');
+
+        // Helper: parse JSON safely
+        function safeParse(str) {
+            if (!str) return null;
+            try { return JSON.parse(str); } catch(e) { return null; }
+        }
+
+        // Helper: check if user is admin or manager
+        function isAdminOrManager() {
+            // Try to get user from localStorage/sessionStorage
+            let user = safeParse(localStorage.getItem('currentUser'));
+            if (!user || !user.role) {
+                // Try legacy keys
+                user = { role: localStorage.getItem('userRole') || sessionStorage.getItem('userRole') };
+            }
+            if (!user.role) return false;
+            // Accept common role casing and allow array if needed
+            let role = user.role;
+            if (Array.isArray(role)) {
+                role = role.map(r => r.toLowerCase());
+                return role.includes('admin') || role.includes('manager');
+            }
+            role = String(role).toLowerCase();
+            return role === 'admin' || role === 'manager';
+        }
+
+        // Set modal colors based on dark mode
+        function setModalColors() {
+            // guard if element missing
+            if (!content) return;
+            const isDark = window.localStorage.getItem('darkMode') === 'true';
+
+            // toggle helper classes to apply background + text color
+            content.classList.remove('sc-light', 'sc-dark');
+            if (isDark) {
+                content.classList.add('sc-dark'); // dark-blue + white text
+            } else {
+                content.classList.add('sc-light'); // white + dark text
+            }
+        }
+
+        // Show modal
+        function showModal() {
+            setModalColors();
+            modal.style.display = 'flex';
+            spinner.style.display = 'inline-block';
+            actionBtn.classList.add('sc-hidden');
+            cancelBtn.classList.add('sc-hidden');
+            updateBtn.classList.add('sc-hidden');
+        }
+
+        // Hide modal
+        function hideModal() {
+            modal.style.display = 'none';
+        }
+
+        // proceed with booking
+        function proceedWithBooking() {
+            hideModal();
+            const car = window.__pendingBookingCar || null;
+            if (car) {
+                window.dispatchEvent(new CustomEvent('open-booking-modal', { detail: car }));
+                const bookingModalEl = document.getElementById('bookingModal');
+                if (bookingModalEl) {
+                    if (window.bootstrap && window.bootstrap.Modal) {
+                        try {
+                            window.bootstrap.Modal.getOrCreateInstance(bookingModalEl).show();
+                        } catch (e) {
+                            bookingModalEl.style.display = 'block';
+                        }
+                    } else {
+                        bookingModalEl.style.display = 'block';
+                    }
+                }
+            } else {
+                hideModal();
+            }
+        }
+
+        // navigate to the forms page
+        function goToFormsPage() {
+            hideModal();
+            window.location.href = '../customer/customer_forms.html';
+        }
+
+        // navigate to update form page (assuming you have this page)
+        function goToUpdatePage() {
+            hideModal();
+            window.location.href = '../customer/customer_forms.html?edit=1';
+        }
+
+        // Attach click handlers
+        actionBtn.onclick = function(e) {};
+        cancelBtn.onclick = hideModal;
+        updateBtn.onclick = goToUpdatePage;
+
+        // Update colors when site toggles dark mode (listening to your dispatched event)
+        window.addEventListener('dark-mode-toggle', function(e) {
+            // small timeout to let other handlers update localStorage if needed
+            setTimeout(setModalColors, 10);
+        });
+
+        window.checkSubmissionAndShowModal = async function() {
+            // If user is admin or manager, skip form check and proceed directly
+            if (isAdminOrManager()) {
+                proceedWithBooking();
+                return;
+            }
+
+            showModal();
+            spinner.style.display = 'inline-block';
+            actionBtn.classList.add('sc-hidden');
+            cancelBtn.classList.add('sc-hidden');
+            updateBtn.classList.add('sc-hidden');
+
+            // initial message (will inherit container color)
+            body.innerHTML = '<div style="display:flex; align-items:center; gap:10px;"><div class="spinner-border text-primary" role="status" style="width:2rem; height:2rem;"></div><div><strong>Checking your submission status...</strong></div></div>';
+            setModalColors();
+
+            let currentUser = null;
+            const storedObj = safeParse(localStorage.getItem('currentUser'));
+            if (storedObj && storedObj.id) {
+                currentUser = storedObj.id;
+            } else {
+                const legacyId = localStorage.getItem('userId') || sessionStorage.getItem('userId');
+                if (legacyId && /^[0-9]+$/.test(legacyId)) {
+                    currentUser = legacyId;
+                }
+            }
+
+            if (!currentUser) {
+                spinner.style.display = 'none';
+                body.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="text-danger" style="width:54px;height:54px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><h4 style="margin-top:10px;">User Not Logged In</h4><p>Please log in to your account before booking a car.</p>';
+                // show cancel button only
+                cancelBtn.classList.remove('sc-hidden');
+                actionBtn.classList.add('sc-hidden');
+                updateBtn.classList.add('sc-hidden');
+                setModalColors();
+                return;
+            }
+
+            try {
+                const res = await fetch(`/forms/user/${encodeURIComponent(currentUser)}`);
+                if (!res.ok) {
+                    spinner.style.display = 'none';
+                    body.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="text-warning" style="width:54px;height:54px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg><h4 style="margin-top:10px;">Form Not Submitted</h4><p>You must submit the customer verification form before booking a car.</p>';
+                    // configure action button as "Submit Form"
+                    actionBtn.textContent = 'Submit Form';
+                    // apply custom warning style
+                    actionBtn.className = 'sc-btn sc-warning';
+                    actionBtn.onclick = goToFormsPage;
+                    actionBtn.classList.remove('sc-hidden');
+                    cancelBtn.classList.remove('sc-hidden');
+                    updateBtn.classList.add('sc-hidden');
+                    setModalColors();
+                    return;
+                }
+
+                const data = await res.json();
+                const hasSubmission = Array.isArray(data) && data.length > 0;
+
+                spinner.style.display = 'none';
+
+                if (hasSubmission) {
+                    // Use neutral markup (no forced light color) so it inherits the container text color
+                    body.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="text-success" style="width:54px;height:54px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>' +
+                        '<h4 style="margin-top:10px;">Form Submitted</h4>' +
+                        '<p style="margin-bottom:10px; opacity: 0.95;">You have already submitted your verification form.<br>Click below to proceed with booking or update your form.</p>';
+                    // configure action button as "Book Now" using custom primary style
+                    actionBtn.textContent = 'Book Now';
+                    actionBtn.className = 'sc-btn sc-primary';
+                    actionBtn.onclick = proceedWithBooking;
+                    actionBtn.classList.remove('sc-hidden');
+
+                    // show cancel and update buttons
+                    cancelBtn.classList.remove('sc-hidden');
+                    updateBtn.textContent = 'Update Form';
+                    updateBtn.className = 'sc-btn sc-info';
+                    updateBtn.classList.remove('sc-hidden');
+
+                    setModalColors();
+                } else {
+                    body.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="text-warning" style="width:54px;height:54px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg><h4 style="margin-top:10px;">Form Not Submitted</h4><p>You must submit the customer verification form before booking a car.</p>';
+                    actionBtn.textContent = 'Submit Form';
+                    actionBtn.className = 'sc-btn sc-warning';
+                    actionBtn.onclick = goToFormsPage;
+                    actionBtn.classList.remove('sc-hidden');
+                    cancelBtn.classList.remove('sc-hidden');
+                    updateBtn.classList.add('sc-hidden');
+                    setModalColors();
+                }
+            } catch (err) {
+                spinner.style.display = 'none';
+                body.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="text-danger" style="width:54px;height:54px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><h4 style="margin-top:10px;">Error</h4><p>Unable to check submission status right now. Please try again later.</p>';
+                cancelBtn.classList.remove('sc-hidden');
+                actionBtn.classList.add('sc-hidden');
+                updateBtn.classList.add('sc-hidden');
+                setModalColors();
+                console.error('checkSubmission error', err);
+            }
+        };
+
+        window.proceedWithBooking = proceedWithBooking;
+        window.goToFormsPage = goToFormsPage;
+        window.goToUpdatePage = goToUpdatePage;
+    })();
+</script>
+
+<script>
+    // Define the carRentalApp function to handle all the booking functionality
+    function carRentalApp() {
+        return {
+            selectedCar: null,
+            bookingDetails: {
+                pickupLocation: 'office',
+                dropoffLocation: 'office',
+                customPickupLocation: '',
+                customDropoffLocation: '',
+                pickupDate: '',
+                pickupTime: '',
+                dropoffDate: '',
+                dropoffTime: '',
+                note: ''
+            },
+            bookingModalInstance: null,
+            confirmationModalInstance: null,
+            resultModalInstance: null,
+            modalTitle: '',
+            modalText: '',
+            isDarkMode: localStorage.getItem('darkMode') === 'true',
+
+            init() {
+                // Set default dates - today for pickup and tomorrow for dropoff
+                const today = new Date();
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+
+                // Format dates for input
+                this.bookingDetails.pickupDate = this.formatDateForInput(today);
+                this.bookingDetails.dropoffDate = this.formatDateForInput(tomorrow);
+
+                // Set default times
+                this.bookingDetails.pickupTime = '10:00';
+                this.bookingDetails.dropoffTime = '10:00';
+
+                // Initialize Bootstrap modal instances
+                this.bookingModalInstance = new bootstrap.Modal(document.getElementById('bookingModal'));
+                this.confirmationModalInstance = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                this.resultModalInstance = new bootstrap.Modal(document.getElementById('resultModal'));
+
+                // Listen for the open-booking-modal event
+                window.addEventListener('open-booking-modal', (event) => {
+                    this.selectedCar = event.detail;
+                    this.bookingModalInstance.show();
+                });
+            },
+
+            formatDateForInput(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            },
+
+            get computedPickupDateTime() {
+                if (!this.bookingDetails.pickupDate || !this.bookingDetails.pickupTime) return null;
+                return new Date(`${this.bookingDetails.pickupDate}T${this.bookingDetails.pickupTime}`);
+            },
+
+            get computedDropoffDateTime() {
+                if (!this.bookingDetails.dropoffDate || !this.bookingDetails.dropoffTime) return null;
+                return new Date(`${this.bookingDetails.dropoffDate}T${this.bookingDetails.dropoffTime}`);
+            },
+
+            totalDays() {
+                if (!this.computedPickupDateTime || !this.computedDropoffDateTime) return 0;
+
+                const diffTime = this.computedDropoffDateTime - this.computedPickupDateTime;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                return diffDays > 0 ? diffDays : 0;
+            },
+
+            totalAmount() {
+                if (!this.selectedCar) return 0;
+                const days = this.totalDays();
+                return (days * this.selectedCar.price).toFixed(2);
+            },
+
+            formatDateTime(date) {
+                if (!date) return '';
+
+                const options = {
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+
+                return date.toLocaleDateString('en-US', options);
+            },
+
+            validateBooking() {
+                if (!this.computedPickupDateTime || !this.computedDropoffDateTime) {
+                    this.showError('Error', 'Please select valid pickup and dropoff dates and times.');
+                    return false;
+                }
+
+                if (this.computedPickupDateTime >= this.computedDropoffDateTime) {
+                    this.showError('Error', 'Dropoff date must be after pickup date.');
+                    return false;
+                }
+
+                const now = new Date();
+                if (this.computedPickupDateTime < now) {
+                    this.showError('Error', 'Pickup date must be in the future.');
+                    return false;
+                }
+
+                if (this.bookingDetails.pickupLocation === 'other' && !this.bookingDetails.customPickupLocation.trim()) {
+                    this.showError('Error', 'Please enter a custom pickup location.');
+                    return false;
+                }
+
+                if (this.bookingDetails.dropoffLocation === 'other' && !this.bookingDetails.customDropoffLocation.trim()) {
+                    this.showError('Error', 'Please enter a custom dropoff location.');
+                    return false;
+                }
+
+                return true;
+            },
+
+            proceedToConfirmation() {
+                if (!this.validateBooking()) return;
+
+                this.bookingModalInstance.hide();
+                this.confirmationModalInstance.show();
+            },
+
+            showSuccess(title, text) {
+                this.modalTitle = title;
+                this.modalText = text;
+                this.resultModalInstance.show();
+            },
+
+            showError(title, text) {
+                this.modalTitle = title;
+                this.modalText = text;
+                this.resultModalInstance.show();
+            },
+
+            async finalizeBooking() {
+                try {
+                    // Get current user info - using the hardcoded value you provided or from localStorage
+                    let currentUser = { id: null, email: null };
+
+                    // Try to get from localStorage first
+                    const storedUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                    if (storedUser.id) {
+                        currentUser = storedUser;
+                    } else {
+                        // Use hardcoded value from your message as fallback
+                        currentUser = { id: 1, email: 'MrCoolGh' };
+                    }
+
+                    if (!currentUser.id) {
+                        this.showError('Error', 'You must be logged in to book a car. Please sign in and try again.');
+                        return;
+                    }
+
+                    // Map pickupLocation and dropoffLocation to the format expected by the API
+                    const pickupLocationType = this.bookingDetails.pickupLocation === 'office' ? 'Our Office' : 'Other Location';
+                    const dropoffLocationType = this.bookingDetails.dropoffLocation === 'office' ? 'Our Office' : 'Other Location';
+
+                    // Create booking data object
+                    const bookingData = {
+                        car_id: this.selectedCar.id,
+                        user_id: currentUser.id,
+                        pickup_location_type: pickupLocationType,
+                        dropoff_location_type: dropoffLocationType,
+                        pickup_location: this.bookingDetails.pickupLocation === 'other' ? this.bookingDetails.customPickupLocation : null,
+                        dropoff_location: this.bookingDetails.dropoffLocation === 'other' ? this.bookingDetails.customDropoffLocation : null,
+                        pickup_date: this.bookingDetails.pickupDate,
+                        pickup_time: this.bookingDetails.pickupTime,
+                        dropoff_date: this.bookingDetails.dropoffDate,
+                        dropoff_time: this.bookingDetails.dropoffTime,
+                        customer_note: this.bookingDetails.note,
+                    };
+
+                    console.log('Sending booking data:', bookingData);
+
+                    // Send API request
+                    const response = await fetch('/api/bookings', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(bookingData)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Failed to create booking');
+                    }
+
+                    const result = await response.json();
+                    console.log('Booking successful:', result);
+
+                    // If successful, show success message
+                    this.confirmationModalInstance.hide();
+                    this.showSuccess('Booking Successful', 'Your booking has been confirmed! You can view your bookings in your account dashboard, or contact us for a quick approval.');
+
+                    // Reset booking form
+                    this.resetBookingForm();
+
+                } catch (error) {
+                    console.error('Booking error:', error);
+                    this.confirmationModalInstance.hide();
+                    this.showError('Error', error.message || 'There was a problem processing your booking. Please try again later.');
+                }
+            },
+
+            resetBookingForm() {
+                const today = new Date();
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+
+                this.bookingDetails = {
+                    pickupLocation: 'office',
+                    dropoffLocation: 'office',
+                    customPickupLocation: '',
+                    customDropoffLocation: '',
+                    pickupDate: this.formatDateForInput(today),
+                    pickupTime: '10:00',
+                    dropoffDate: this.formatDateForInput(tomorrow),
+                    dropoffTime: '10:00',
+                    note: ''
+                };
+            }
+        };
+    }
+</script>
+
+
+<!-- How It Works Start -->
+<div class="container-fluid bg-light mt-5 py-5" id="started">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">How It Works</div>
+            <h1 class="mb-4">Get On The Road In 3 Easy Steps</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <!-- Step 1: Sign Up -->
+            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.3s">
+                <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                    <div class="service-icon btn-square">
+                        <i class="fa fa-user-plus fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Sign Up</h5>
+                    <p>Create your account in just a few minutes. It’s fast, free, and secure.</p>
+                    <a class="btn px-3 mt-auto mx-auto" href="../auth/sign_up.html">Create Account</a>
+                </div>
+            </div>
+            <!-- Step 2: Submit Document -->
+            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.7s">
+                <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                    <div class="service-icon btn-square">
+                        <i class="fa fa-file-alt fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Submit Document</h5>
+                    <p>Go to your dashboard and submit the necessary document for approval</p>
+                    <a class="btn px-3 mt-auto mx-auto" href="../auth/sign_in.html" id="submitDocumentLink">Dashboard</a>
+                </div>
+            </div>
+            <!-- Step 3: Book A Car -->
+            <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="0.5s">
+                <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                    <div class="service-icon btn-square">
+                        <i class="fa fa-car fa-2x"></i>
+                    </div>
+                    <h5 class="mb-3">Book A Car</h5>
+                    <p>Browse our wide selection of vehicles and choose the one that fits your needs.</p>
+                    <a class="btn px-3 mt-auto mx-auto" href="#available-cars">Find a Car</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- How It Works End-->
+
+<script>
+    function getUserRole() {
+        return 'customer';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var submitDocumentLink = document.getElementById('submitDocumentLink');
+        if (submitDocumentLink) {
+            submitDocumentLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                var role = getUserRole();
+                if (role === 'customer') {
+                    window.location.href = '../customer/customer_forms.html';
+                } else if (role === 'manager') {
+                    window.location.href = '../manager/manager_forms.html';
+                } else if (role === 'admin') {
+                    window.location.href = '../admin/admin_customer_forms.html';
+                } else {
+                    window.location.href = '../auth/sign_in.html';
+                }
+            });
+        }
+    });
+</script>
+
+
+<!-- T&C -->
+<div class="container-fluid py-5">
+    <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
+        <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Terms & Conditions</div>
+        <h1 class="mb-4">Please read these Terms & Conditions carefully</h1>
+        <p class="text-muted">By renting a vehicle from us you agree to the following terms. If you have any questions, contact our support before proceeding.</p>
+    </div>
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <p class="mb-4"> <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>NO REFUND</h6>
+                For confirmed and processed booking, where processed booking means a vehicle has
+                been paid or handed over to a client. There will be no refund if the client still insists on canceling booking
+                when there is no damage to the vehicle, only 30% of paid money will be refunded.</p>
+
+                <p class="mb-4"> <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>DAMAGE FEE</h6>
+                Regardless of insurance coverage on the vehicle, Renter will take full responsibility
+                in case there are any dents, damages or any faults, which the Company does not recognize.
+                </p>
+
+                <p class="mb-4"> <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>EXTENDING RENT</h6>
+                If the Renter opts to add extra days to already processed booking, you may be
+                charged extra since this will interfere other bookings from our client.
+                </p>
+
+            </div>
+
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <p class="mb-4"> <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i> DRIVING BEYOND SAID DESTINATION</h6>
+                For instance, if your processed booking is within Accra, you are required to drive within Accra Only. Consult us
+                in case you have to travel outside Accra. If you drive beyond the said destination, there will be a penalty fee added
+                to your rent.</p>
+
+                <p class="mb-4"> <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>FUEL</h6>
+                we do not provide fuel for any of our cars. Renter is required to drop off the vehicle with the
+                same fuel level as it was picked.
+                </p>
+
+                <p class="mb-4"><h5 class="mb-3"> If you have any questions, contact our support before proceeding.</h5>
+                <p><i class="fa fa-phone-alt me-3"></i>+233 (0) 245 016 493</p>
+                <p><i class="fa fa-phone-alt me-3"></i>+233 (0) 244 201 170</p>
+                <p><i class="fa fa-envelope me-3"></i>matcharscarrentals@gmail.com</p>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- T&C -->
+
+
+<!-- About Start -->
+<div class="container-fluid py-5" id="about">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img">
+                    <img class="img-fluid" src="../img/about-img.png">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="mb-4">About Us</h1>
+                <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">About Us</div>
+                <p class="mb-4">For the past two years, Matchars Car Rentals has consistently delivered outstanding transportation services with a
+                    strong commitment to customer safety and comfort. Our top priority is ensuring that every journey is safe, smooth, and stress-free.<br>
+
+                    <br>With extensive knowledge of local and regional routes, our experienced and professional chauffeurs are dedicated to getting customers to
+                    their destinations safely and on time. We strive to exceed expectations by delivering exceptional service tailored to each client’s needs.<br>
+
+                    <br>Our diverse fleet includes Sedans, 4-Wheel Drives (4x4), Mini Buses, Luxury Vehicles, and Coaches—ready to meet a wide range of travel demands.
+                    Currently, we provide fast, efficient, and reliable transportation services throughout Ghana and across four neighboring West African countries.</p>
+
+                <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Our Mission</div>
+                <p class="mb-4">Our mission is to Prioritize our Customers Safety and exceed their
+                    expectations , Whilst delivering the best value in an efficient, effective and friendly approach in our relationship.</p>
+
+                <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Our Vision</div>
+                <p class="mb-4">To become the leading car rental and transportation service in Ghana and West Africa, known for exceptional safety, reliability, and customer satisfaction.</p>
+                <div class="row g-3">
+                </div>
+                <div class="d-flex align-items-center mt-4">
+                    <a class="btn btn-outline-primary btn-square me-3" href="https://www.facebook.com/p/Matchars-Car-Rentals-100084250406501/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-primary btn-square me-3" href="https://www.instagram.com/matchars_com?igsh=dGJ0dXQ1Z2czZTZt" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- Team Start -->
+<div class="container-fluid bg-light py-5" id="team">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-12 wow fadeIn text-center" data-wow-delay="0.1s">
+                <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Our Professionals</div>
+                <h1 class="mb-4">Meet Our Dedicated Team</h1>
+                <p class="mb-4">Our team is composed of experienced professionals committed to providing outstanding services. From our knowledgeable manager to our friendly staff, each member brings expertise,
+                    reliability, and a customer-first attitude to every interaction. Together, we ensure a seamless rental
+                    experience, maintain our fleet to the highest standards, and deliver personalized solutions to meet your
+                    transportation needs. Trust our team to make your journey safe, convenient, and enjoyable.</p>
+            </div>
+
+            <div class="col-12">
+                <!-- Added CSS to force the CEO container to occupy the whole column across all breakpoints -->
+                <style>
+                    /* Force #static-ceo to behave as a full-width row element regardless of bootstrap column classes */
+                    #static-ceo {
+                        flex: 0 0 100% !important;
+                        max-width: 77% !important;
+                        width: 100% !important;
+                    }
+
+                    /* Remove any unintended horizontal centering padding inside the team-item so content aligns naturally */
+                    #static-ceo .team-item {
+                        margin-left: 0;
+                        margin-right: 0;
+                        width: 100%;
+                    }
+
+                    /* Ensure the team's internal layout remains centered on small screens but natural on larger */
+                    @media (min-width: 768px) {
+                        #static-ceo .team-item {
+                            /* keep original visual style; no forced shrinking */
+                        }
+                    }
+
+                    /* Increase the size of the CEO picture */
+                    #static-ceo .ceo-img {
+                        width: 300px !important;
+                        height: 300px !important;
+                        object-fit: cover;
+                        border-radius: 3rem !important; /* Make it not rounded */
+                    }
+
+                    /* Mobile / small-screen fixes: make CEO container full width and scale the image UP */
+                    @media (max-width: 767.98px) {
+                        #static-ceo {
+                            max-width: 100% !important;
+                            padding-left: 0.5rem;
+                            padding-right: 0.5rem;
+                        }
+
+                        #static-ceo .team-item {
+                            padding-left: 1rem;
+                            padding-right: 1rem;
+                        }
+
+                        /* INCREASE image size on small screens */
+                        #static-ceo .ceo-img {
+                            width: 250px !important;
+                            height: 250px !important;
+                        }
+                    }
+
+                    /* Extra small phones: keep image at good size */
+                    @media (max-width: 399.98px) {
+                        #static-ceo .ceo-img {
+                            width: 180px !important;
+                            height: 180px !important;
+                        }
+                    }
+                </style>
+
+                <div class="row g-4 justify-content-center" id="team-container">
+                    <!-- CEO Card (static, always at the top, not from backend) -->
+                    <div id="static-ceo" class="col-12 col-md-8 col-lg-6 text-center">
+                        <div class="team-item bg-white rounded shadow-sm p-4 d-flex flex-column align-items-center">
+                            <!-- Replace src with your CEO image path -->
+                            <img src="../images/avatar/CEO.jpg" alt="Charles Amoakoh Danso — CEO" class="mb-3 ceo-img">
+                            <h4 class="mb-1">Charles Amoakoh Danso</h4>
+                            <p class="text-primary mb-1" style="font-weight:600;">Chief Executive Officer</p>
+                            <p class="text-secondary small mb-3">The company’s most valuable asset is the expertise and experience of its founder, Charles
+                                Amoakoh Danso. He has been in the driving and transport profession for the past 34 years. He has
+                                spent much of his career working with reputable companies like Japanese Construction Vanef Car
+                                Rental, Maersk, and Newmont, where he oversaw the operations, rising from driver to deputy chief
+                                Driver. There, he learned the requirements for automotive maintenance from both a technical and
+                                customer service perspective, as well as car rental policies and procedures. Matcharles Enterprise
+                                has employed an experienced assistant manager to manage the location. This is an experienced
+                                operations manager who is trained in other important company operations by Charles Amoakoh,
+                                so he will be able to take over in the absence of the CEO.</p>
+                        </div>
+                    </div>
+
+                    <!-- Staff members will be loaded dynamically here -->
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        // CEO wrapper HTML (match the markup above)
+        const ceoId = 'static-ceo';
+
+        function ensureCEO() {
+            const container = document.getElementById('team-container');
+            if (!container) return;
+
+            // If static CEO is missing (maybe dynamic loader replaced innerHTML), recreate and insert it.
+            if (!document.getElementById(ceoId)) {
+                const wrapper = document.createElement('div');
+                wrapper.id = ceoId;
+                wrapper.className = 'col-12 col-md-8 col-lg-6 text-center';
+                wrapper.innerHTML = `
+                <div class="team-item bg-white rounded shadow-sm p-4 d-flex flex-column align-items-center">
+                    <img src="../images/avatar/CEO.jpg" alt="Charles Amoakoh Danso — CEO" class="mb-3 ceo-img">
+                    <h4 class="mb-1">Charles Amoakoh Danso</h4>
+                    <p class="text-primary mb-1" style="font-weight:600;">Chief Executive Officer</p>
+                    <p class="text-secondary small mb-3">The company’s most valuable asset is the expertise and experience of its founder, Charles
+Amoakoh Danso. He has been in the driving and transport profession for the past 34 years. He has
+spent much of his career working with reputable companies like Japanese Construction Vanef Car
+Rental, Maersk, and Newmont, where he oversaw the operations, rising from driver to deputy chief
+Driver. There, he learned the requirements for automotive maintenance from both a technical and
+customer service perspective, as well as car rental policies and procedures. Matcharles Enterprise
+has employed an experienced assistant manager to manage the location. This is an experienced
+operations manager who is trained in other important company operations by Charles Amoakoh,
+so he will be able to take over in the absence of the CEO.</p>
+                </div>
+            `;
+                // Insert as first child so it is on top of staff items
+                container.insertBefore(wrapper, container.firstChild);
+                return;
+            }
+
+            // make sure CEO is first child (in case dynamic code moved elements around)
+            const ceoEl = document.getElementById(ceoId);
+            if (container.firstChild !== ceoEl) {
+                container.insertBefore(ceoEl, container.firstChild);
+            }
+        }
+
+        // Run immediately in case content is already present
+        ensureCEO();
+
+        // Observe #team-container for child changes and re-insert CEO if needed
+        const target = document.getElementById('team-container');
+        if (target && window.MutationObserver) {
+            const mo = new MutationObserver(function () {
+                ensureCEO();
+            });
+            mo.observe(target, { childList: true, subtree: false });
+        }
+
+        // Fallback: try a few times in intervals (covers cases where the container is populated later)
+        let tries = 0;
+        const maxTries = 12; // 6 seconds
+        const interval = setInterval(function () {
+            ensureCEO();
+            tries++;
+            if (tries >= maxTries) clearInterval(interval);
+        }, 500);
+    })();
+</script>
+
+<script>
+    // Fetch team members when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchTeamMembers();
+    });
+
+    // Function to fetch team members from the API
+    function fetchTeamMembers() {
+        fetch('/api/public/staff')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch team members');
+                }
+                return response.json();
+            })
+            .then(staff => {
+                displayTeamMembers(staff);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('team-container').innerHTML = `
+                    <div class="col-12 text-center">
+                        <p class="text-danger">Failed to load team members. Please try again later.</p>
+                    </div>
+                `;
+            });
+    }
+
+    // Function to display team members on the page
+    function displayTeamMembers(staff) {
+        const container = document.getElementById('team-container');
+
+        if (staff.length === 0) {
+            container.innerHTML = `
+                <div class="col-12 text-center">
+                    <p>No team members found.</p>
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+        staff.forEach(member => {
+            html += `
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="team-item bg-white text-center rounded p-4 pt-0" style="max-width: 370px; min-height: 380px; margin:auto;">
+                        <img class="img-fluid rounded-circle p-2 mt-4" src="${member.avatar}" alt="${member.fullName}" style="width: 200px; height: 200px; object-fit: cover;">
+                        <h5 class="mb-1 mt-3">${member.fullName}</h5>
+                        <small>${member.role}</small>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">${member.phone}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+</script>
+<!-- Team End -->
+
+
+<!-- FAQs Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Popular FAQs</div>
+            <h1 class="mb-4">Frequently Asked Questions</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionFAQ1">
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.1s">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                How do I rent a car from Matchars?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                             data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                To rent a car from Matchars, simply follow three easy steps. First, sign up for a free account—it
+                                only takes a few minutes. Once registered, browse our wide selection of vehicles and book the one that best fits
+                                your travel needs. After booking, go to your dashboard and submit the required documents for approval. Once approved,
+                                you’re ready to hit the road!                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.2s">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                What types of cars are available for rent?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                             data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                Matchars offers a diverse fleet of vehicles to suit all kinds of travel needs. Our selection includes
+                                Sedans, 4-Wheel Drives (4x4), Mini Buses, Luxury Vehicles, and Coaches. Whether you’re planning a
+                                weekend getaway, a family trip, or need a car for business travel, we have the perfect vehicle for you.                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.3s">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What are the rental rates for your cars?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                             data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                Our rental rates varies depending on the type of car, year model, Number of days and the
+                                destination. e.g., All Sedan vehicles are only used within Accra and Ranges from Ghc 600 upwards
+                                per day and the SUV’s Ranges from Ghc 900 upwards within Accra per day. Call Our help line for more information.                           </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.4s">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                Where does Matchars operate?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                             data-bs-parent="#accordionFAQ1">
+                            <div class="accordion-body">
+                                Matchars provides reliable and efficient transportation services throughout Ghana and in four neighboring West African countries.
+                                Whether you're traveling within Accra, exploring regional destinations, or planning cross-border trips, our service coverage
+                                ensures you get to your destination safely and comfortably.                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionFAQ2">
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.5s">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Are your cars fuel-efficient and easy to drive?
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                             data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Yes, many of our vehicles are both fuel-efficient and easy to drive. We offer hybrid models like the Toyota RAV4 and
+                                Honda Accord for better fuel economy, along with gasoline cars like the Mercedes-Benz C-Class, which offers impressive
+                                mileage. Most of our vehicles have automatic transmissions, making them ideal for all types of drivers.                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.6s">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                Do you offer customer support for rental inquiries?
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                             data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Yes, we’re always here to help! Whether you have questions about booking, rental requirements, or document submissions,
+                                our support team is ready to assist. You can reach us by phone at +233 (0) 0245016493, email us at matcharscarrentals@gmail.com,
+                                or fill out the contact form on our website for a quick response.                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.7s">
+                        <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                Do I need a driver’s license to rent a car?
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                             data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Yes, a valid driver’s license is required to rent a car from Matchars. During the booking process,
+                                you'll be asked to submit your license along with any other necessary identification documents for approval.
+                                This ensures compliance with road regulations and helps us maintain safety standards for all our clients.                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item wow fadeIn" data-wow-delay="0.8s">
+                        <h2 class="accordion-header" id="headingEight">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                Can I rent a car for business or long-distance travel?
+                            </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                             data-bs-parent="#accordionFAQ2">
+                            <div class="accordion-body">
+                                Yes, Matchars is fully equipped to handle business travel and long-distance trips. Our fleet includes comfortable and reliable
+                                options perfect for corporate use, intercity travel, and cross-border journeys. With experienced drivers and vehicles suited for
+                                long hauls, we ensure your travel is both safe and efficient.                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQs Start -->
+
+
+<!-- Contact Start -->
+  <div class="container-fluid bg-light py-5" id="contact">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Contact Us</div>
+            <h1 class="mb-4">If You Have Any Query, Please Contact Us</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <p class="text-center mb-4">We're here to help! Whether it's about booking a car, rental requirements, or anything else — feel free to reach out to our support team anytime.</p>
+                <div class="wow fadeIn" data-wow-delay="0.3s">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name">
+                                    <label for="name">Your Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email">
+                                    <label for="email">Your Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control" id="phone" >
+                                    <label for="phone">Phone Number</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject">
+                                    <label for="subject">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control"  id="message" style="height: 150px"></textarea>
+                                    <label for="message">Message</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+
+<!-- Google Map Section -->
+<div class="container py-5">
+    <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+        <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Google Map</div>
+        <h1 class="mb-4">Find Us On The Google Map</h1>
+    </div>
+    <div class="row justify-content-center">
+        <!-- Map Column -->
+        <div class="col-lg-7 wow fadeIn" data-wow-delay="0.3s">
+            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 900px;">
+            </div>
+            <div class="map-container" style="height: 100%; width: 100%; border-radius: 20px; overflow: hidden;">
+                <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.9539116431424!2d-0.1752162255682493!3d5.719778931982214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9d47a8c6dfd5%3A0xbdd3c4d1aa68c0c5!2sMATCHARS%20CAR%20RENTALS!5e0!3m2!1sen!2sgh!4v1752753593842!5m2!1sen!2sgh"
+                        width="100%"
+                        height="400px"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white-50 footer pt-5">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                <a href="homepage.html" class="d-inline-block mb-3">
+                    <h1 class="text-white">Matchars<span class="text-primary">.</span></h1>
+                </a>
+                <p class="mb-0">Matchars Car Rentals offers safe, reliable, and comfortable transportation across Ghana and West Africa.
+                    With professional drivers and a wide range of vehicles, we’re committed to exceeding your travel expectations.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                <h5 class="text-white mb-4">Get In Touch</h5>
+                <p><i class="fa fa-map-marker-alt me-3"></i>Pantang Junction, on the Adenta-Aburi road, Accra Ghana</p>
+                <p><i class="fa fa-phone-alt me-3"></i>+233 (0) 0245016493</p>
+                <p><i class="fa fa-envelope me-3"></i>matcharscarrentals@gmail.com</p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/p/Matchars-Car-Rentals-100084250406501/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/matchars_com?igsh=dGJ0dXQ1Z2czZTZt" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                <h5 class="text-white mb-4">Popular Link</h5>
+                <a class="btn btn-link" href="#about">About Us</a>
+                <a class="btn btn-link" href="#contact">Contact Us</a>
+                <a class="btn btn-link" href="#started">Getting Started</a>
+                <a class="btn btn-link" href="#available-cars">Available Cars</a>
+                <a class="btn btn-link" href="#team">Our Team</a>
+            </div>
+            <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                <h5 class="text-white mb-4">Our Services</h5>
+                <a class="btn btn-link" href="">Short Term Rentals</a>
+                <a class="btn btn-link" href="">Long Term Rentals</a>
+                <a class="btn btn-link" href="">Airport Transfer Service</a>
+                <a class="btn btn-link" href="">Chauffeur Driven Service</a>
+                <a class="btn btn-link" href="">Pick Up Service</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="container wow fadeIn" data-wow-delay="0.1s">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="homepage.html">Matchars</a>, All Right Reserved.
+
+                    Designed By University Of Ghana DE SWE 2025 G1
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/lib/wow/wow.min.js"></script>
+<script src="../assets/lib/easing/easing.min.js"></script>
+<script src="../assets/lib/waypoints/waypoints.min.js"></script>
+<script src="../assets/lib/counterup/counterup.min.js"></script>
+<script src="../assets/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="../assets/js/main.js"></script>
+
+<script>
+
+    /* ========================= CONFIG (ADJUST PATHS AS NEEDED) ========================= */
+    const APP_AUTH_CONFIG = {
+        homepage: '../all_users/homepage.html',  // Where to send logged-in users
+        loginPage: './login.html',              // Path (relative) to the login page
+        tokenKey: 'authToken',                  // Key for storing token (if any)
+        userKey: 'currentUser',
+        logoutFlagKey: 'lastLogout',            // Used for cross-tab synchronization
+        tokenExpiryKey: 'authTokenExpiry',      // Optional expiry timestamp (ms)
+        // If you want an auto-expire (e.g., 7 days):
+        defaultTokenLifetimeMs: 7 * 24 * 60 * 60 * 1000
+    };
+
+    /* ========================= LOGIN (CALL AFTER SUCCESSFUL AUTH) ========================= */
+    function persistLogin(userObject, token, options = {}) {
+        try {
+            if (!userObject || !userObject.id) {
+                console.warn('persistLogin: userObject missing id');
+                return;
+            }
+            localStorage.setItem(APP_AUTH_CONFIG.userKey, JSON.stringify(userObject));
+
+            if (token) {
+                localStorage.setItem(APP_AUTH_CONFIG.tokenKey, token);
+                const lifetime = options.lifetimeMs || APP_AUTH_CONFIG.defaultTokenLifetimeMs;
+                localStorage.setItem(APP_AUTH_CONFIG.tokenExpiryKey, (Date.now() + lifetime).toString());
+            }
+
+            // Optional: Prevent navigating "back" to login page
+            // (Replace current history so back button doesn’t show login again)
+            if (window.location.pathname.includes('login')) {
+                window.location.replace(APP_AUTH_CONFIG.homepage);
+            }
+        } catch (e) {
+            console.error('persistLogin failed', e);
+        }
+    }
+
+    /* ========================= LOGOUT (CALL ON LOGOUT BUTTON) ========================= */
+    function logoutUser(redirect = true) {
+        try {
+            localStorage.removeItem(APP_AUTH_CONFIG.userKey);
+            localStorage.removeItem(APP_AUTH_CONFIG.tokenKey);
+            localStorage.removeItem(APP_AUTH_CONFIG.tokenExpiryKey);
+            localStorage.setItem(APP_AUTH_CONFIG.logoutFlagKey, Date.now().toString()); // broadcast to other tabs
+        } catch (e) {
+            console.error('logoutUser failed', e);
+        }
+        if (redirect) {
+            // Always use replace so back button won’t return to a protected page
+            window.location.replace(APP_AUTH_CONFIG.loginPage);
+        }
+    }
+
+    /* ========================= CHECK AUTH STATE ========================= */
+    function getCurrentUser() {
+        try {
+            return JSON.parse(localStorage.getItem(APP_AUTH_CONFIG.userKey) || 'null');
+        } catch {
+            return null;
+        }
+    }
+
+    function isTokenExpired() {
+        const expiry = localStorage.getItem(APP_AUTH_CONFIG.tokenExpiryKey);
+        if (!expiry) return false; // No expiry set
+        return Date.now() > Number(expiry);
+    }
+
+    function isAuthenticated() {
+        const user = getCurrentUser();
+        if (!user || !user.id) return false;
+
+        // If using tokens
+        const token = localStorage.getItem(APP_AUTH_CONFIG.tokenKey);
+        if (!token) return false;
+
+        if (isTokenExpired()) {
+            // Auto-logout on expiry
+            logoutUser(false);
+            return false;
+        }
+        return true;
+    }
+
+    /* ========================= ROUTE GUARD FOR PROTECTED PAGES =========================
+       Include this script on any protected page (homepage, dashboard, etc.) and call:
+       guardProtectedPage();
+    */
+    function guardProtectedPage() {
+        if (!isAuthenticated()) {
+            // Not logged in -> go to login
+            window.location.replace(APP_AUTH_CONFIG.loginPage);
+            return;
+        }
+        // Keep token fresh (optional sliding expiration)
+        const expiry = localStorage.getItem(APP_AUTH_CONFIG.tokenExpiryKey);
+        if (expiry) {
+            const timeLeft = Number(expiry) - Date.now();
+            const oneHour = 60 * 60 * 1000;
+            // If less than an hour remains, extend
+            if (timeLeft < oneHour) {
+                localStorage.setItem(APP_AUTH_CONFIG.tokenExpiryKey,
+                    (Date.now() + APP_AUTH_CONFIG.defaultTokenLifetimeMs).toString());
+            }
+        }
+    }
+
+    /* ========================= LOGIN PAGE GUARD =========================
+       Include on the login page to push authenticated users away instantly.
+       (You already had a version – keeping yours untouched – this is a robust fallback.)
+    */
+    function guardLoginPage() {
+        if (isAuthenticated()) {
+            window.location.replace(APP_AUTH_CONFIG.homepage);
+        }
+    }
+
+    /* ========================= HISTORY BACK PREVENTION (OPTIONAL) =========================
+       Prevent returning to login page if already logged in (client convenience only).
+    */
+    function preventBackToLoginIfLoggedIn() {
+        if (!isAuthenticated()) return;
+        if (window.location.pathname.includes('login')) {
+            window.location.replace(APP_AUTH_CONFIG.homepage);
+        }
+        // After redirect, push new history state
+        window.history.replaceState({ noBack: true }, '', window.location.href);
+        window.addEventListener('popstate', function () {
+            if (isAuthenticated() && window.location.pathname.includes('login')) {
+                window.location.replace(APP_AUTH_CONFIG.homepage);
+            }
+        });
+    }
+
+    /* ========================= CROSS-TAB LOGOUT SYNC ========================= */
+    window.addEventListener('storage', (event) => {
+        if (event.key === APP_AUTH_CONFIG.logoutFlagKey) {
+            // Another tab logged out
+            const onLoginPage = window.location.pathname.includes('login');
+            if (!onLoginPage) {
+                // Redirect this tab to login as well
+                window.location.replace(APP_AUTH_CONFIG.loginPage);
+            }
+        }
+    });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // If we are on a login page, guard it (safe: does nothing if not logged in)
+        if (window.location.pathname.toLowerCase().includes('login')) {
+            guardLoginPage();
+            // Optionally prevent navigating back to login after redirect
+            preventBackToLoginIfLoggedIn();
+        }
+    });
+
+</script>
+
+</body>
+
+</html>

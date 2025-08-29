@@ -1,0 +1,1260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags  -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <title>Dashboard</title>
+      <link rel="icon" type="image/png" href="../img/about-img.png">
+
+    <!-- CSS Assets -->
+    <link rel="stylesheet" href="../assets/css/app.css">
+
+    <!-- Javascript Assets -->
+    <script src="../assets/js/app.js" defer=""></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="css2?family=Inter:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <script>
+      /**
+       * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
+       */
+      localStorage.getItem("_x_darkMode_on") === "true" &&
+        document.documentElement.classList.add("dark");
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get current user from localStorage
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+        // Only allow admins to stay on the page
+        if (!currentUser || !currentUser.id || currentUser.role !== 'manager') {
+          // Redirect non-admin users to homepage (or another appropriate page)
+          window.location.href = '../all_users/homepage.html';
+        }
+        // If the user is admin, they stay on the page
+      });
+    </script>
+
+    <style>
+      .pad{
+        padding:3rem 4rem 0 4rem;
+      }
+    </style>
+  </head>
+
+  <body x-data="" class="is-header-blur" x-bind="$store.global.documentBody">
+    <!-- App preloader-->
+    <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+      <div class="app-preloader-inner relative inline-block size-48"></div>
+    </div>
+
+    <!-- Page Wrapper -->
+    <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak="">
+
+      <!-- Sidebar -->
+      <div class="sidebar print:hidden" x-data="sidebarUser()">
+        <!-- Main Sidebar -->
+        <div class="main-sidebar">
+          <div class="flex h-full w-full flex-col items-center border-r border-slate-150 bg-white dark:border-navy-700 dark:bg-navy-800">
+
+            <!-- Application Logo -->
+            <div class="flex pt-4">
+              <!-- Profile -->
+              <div x-data="usePopper({placement:'right-end',offset:12})" @click.outside="isShowPopper && (isShowPopper = false)" class="flex">
+                <button @click="isShowPopper = !isShowPopper" x-ref="popperRef" class="avatar size-12">
+                  <img class="rounded-full" :src="userAvatar" :alt="userName" onerror="this.src='../images/avatar/avatar-12.jpg'">
+                  <span class="absolute right-0 size-3.5 rounded-full border-2 border-white bg-success dark:border-navy-700"></span>
+                </button>
+
+                <div :class="isShowPopper && 'show'" class="popper-root fixed" x-ref="popperRoot">
+                  <div class="popper-box w-64 rounded-lg border border-slate-150 bg-white shadow-soft dark:border-navy-600 dark:bg-navy-700">
+                    <div class="flex items-center space-x-4 rounded-t-lg bg-slate-100 py-5 px-4 dark:bg-navy-800">
+                      <div class="avatar size-14">
+                        <img class="rounded-full" :src="userAvatar" :alt="userName" onerror="this.src='../images/avatar/avatar-12.jpg'">
+                      </div>
+                      <div>
+                        <a href="#" class="text-base font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light" x-text="userName">
+                          User Name
+                        </a>
+                        <p class="text-xs text-slate-400 dark:text-navy-300" x-text="userRole">
+                          Role
+                        </p>
+                      </div>
+                    </div>
+                    <div class="flex flex-col pt-2 pb-5">
+                      <a href="../all_users/homepage.html" class="group flex items-center space-x-3 py-2 px-4 tracking-wide outline-none transition-all hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-navy-600 dark:focus:bg-navy-600">
+                        <div class="flex size-8 items-center justify-center rounded-lg bg-error text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                          </svg>
+                        </div>
+                        <div>
+                          <h2 class="font-medium text-slate-700 transition-colors group-hover:text-primary group-focus:text-primary dark:text-navy-100 dark:group-hover:text-accent-light dark:group-focus:text-accent-light">
+                            Home Page
+                          </h2>
+                          <div class="text-xs text-slate-400 line-clamp-1 dark:text-navy-300">
+                            Go to home page
+                          </div>
+                        </div>
+                      </a>
+
+                      <div class="mt-3 px-4">
+                        <button @click="logout" class="btn h-9 w-full space-x-2 bg-primary text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                          </svg>
+                          <span>Logout</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Sections Links -->
+            <div class="is-scrollbar-hidden flex grow flex-col space-y-4 overflow-y-auto pt-6">
+              <!-- Dashboards - Active Page -->
+              <a href="manager_dashboard.html" class="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 dark:text-accent-light dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90" x-tooltip.placement.right="'Dashboards'">
+                <svg class="size-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24">
+                  <path fill="currentColor" fill-opacity=".3" d="M5 14.059c0-1.01 0-1.514.222-1.945.221-.43.632-.724 1.453-1.31l4.163-2.974c.56-.4.842-.601 1.162-.601.32 0 .601.2 1.162.601l4.163 2.974c.821.586 1.232.88 1.453 1.31.222.43.222.935.222 1.945V19c0 .943 0 1.414-.293 1.707C18.414 21 17.943 21 17 21H7c-.943 0-1.414 0-1.707-.293C5 20.414 5 19.943 5 19v-4.94Z"></path>
+                  <path fill="currentColor" d="M3 12.387c0 .267 0 .4.084.441.084.041.19-.04.4-.204l7.288-5.669c.59-.459.885-.688 1.228-.688.343 0 .638.23 1.228.688l7.288 5.669c.21.163.316.245.4.204.084-.04.084-.174.084-.441v-.409c0-.48 0-.72-.102-.928-.101-.208-.291-.355-.67-.65l-7-5.445c-.59-.459-.885-.688-1.228-.688-.343 0-.638.23-1.228.688l-7 5.445c-.379.295-.569.442-.67.65-.102.208-.102.448-.102.928v.409Z"></path>
+                  <path fill="currentColor" d="M11.5 15.5h1A1.5 1.5 0 0 1 14 17v3.5h-4V17a1.5 1.5 0 0 1 1.5-1.5Z"></path>
+                  <path fill="currentColor" d="M17.5 5h-1a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5Z"></path>
+                </svg>
+              </a>
+
+              <!-- Admin Bookings -->
+              <a href="manager_bookings.html" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'Manage Bookings'">
+                <svg class="size-7" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.85714 3H4.14286C3.51167 3 3 3.51167 3 4.14286V9.85714C3 10.4883 3.51167 11 4.14286 11H9.85714C10.4883 11 11 10.4883 11 9.85714V4.14286C11 3.51167 10.4883 3 9.85714 3Z" fill="currentColor"></path>
+                  <path d="M9.85714 12.8999H4.14286C3.51167 12.8999 3 13.4116 3 14.0428V19.757C3 20.3882 3.51167 20.8999 4.14286 20.8999H9.85714C10.4883 20.8999 11 20.3882 11 19.757V14.0428C11 13.4116 10.4883 12.8999 9.85714 12.8999Z" fill="currentColor" fill-opacity="0.3"></path>
+                  <path d="M19.757 3H14.0428C13.4116 3 12.8999 3.51167 12.8999 4.14286V9.85714C12.8999 10.4883 13.4116 11 14.0428 11H19.757C20.3882 11 20.8999 10.4883 20.8999 9.85714V4.14286C20.8999 3.51167 20.3882 3 19.757 3Z" fill="currentColor" fill-opacity="0.3"></path>
+                  <path d="M19.757 12.8999H14.0428C13.4116 12.8999 12.8999 13.4116 12.8999 14.0428V19.757C12.8999 20.3882 13.4116 20.8999 14.0428 20.8999H19.757C20.3882 20.8999 20.8999 20.3882 20.8999 19.757V14.0428C20.8999 13.4116 20.3882 12.8999 19.757 12.8999Z" fill="currentColor" fill-opacity="0.3"></path>
+                </svg>
+              </a>
+
+              <!-- Forms -->
+              <a href="manager_forms.html" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'Manage Forms'">
+                  <svg class="size-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                      <rect x="2" y="10" width="20" height="10" rx="1.5" fill="currentColor" fill-opacity="0.20"/>
+                      <rect x="3.5" y="5.5" width="17" height="10" rx="1.5" fill="currentColor" fill-opacity="0.45"/>
+                      <rect x="6" y="1" width="12" height="8" rx="1.25" fill="currentColor" fill-opacity="0.95"/>
+                      <line x1="8" y1="3.5" x2="16" y2="3.5" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.95"/>
+                      <line x1="8" y1="5.5" x2="14" y2="5.5" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.95"/>
+                  </svg>
+              </a>
+
+              <!-- Chat -->
+              <a href="manager_chat.html" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'Chat'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.009 9.009 0 01-5-1.563l-4.223.885.898-4.21A8.962 8.962 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </a>
+
+              <!-- Users -->
+              <a href="manager_manage_users.html" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'Manage Users'">
+                <!-- UPDATED ICON: Users / Manage Users (only the SVG changed) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <!-- Two person heads -->
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 11a4 4 0 100-8 4 4 0 000 8zM17 13a3 3 0 100-6 3 3 0 000 6z"/>
+                  <!-- Primary user body -->
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 20.25a6.75 6.75 0 0113.5 0V21a.75.75 0 01-.75.75H3.75A.75.75 0 013 21v-.75z"/>
+                  <!-- Secondary user body (smaller, to the right) -->
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 21.75a.75.75 0 01-.75-.75v-.75a7.46 7.46 0 01.6-2.97 5.25 5.25 0 015.4 0A7.46 7.46 0 0122.5 20.25v.75a.75.75 0 01-.75.75h-5.25z"/>
+                </svg>
+              </a>
+
+              <!-- staff -->
+              <a href="manager_manage_staff.html" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'Manage Staff'">
+                <!-- UPDATED ICON (different users-style icon) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <!-- Center user -->
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 12.5c2.071 0 3.75-1.679 3.75-3.75S14.071 5 12 5s-3.75 1.679-3.75 3.75S9.929 12.5 12 12.5z"/>
+                  <!-- Left user (behind) -->
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6.25 11.25A3 3 0 106.26 5.5"/>
+                  <!-- Right user (behind) -->
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M17.75 11.25A3 3 0 1017.74 5.5"/>
+                  <!-- Center body -->
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6.75 18.5c0-2.9 2.66-5.25 5.25-5.25s5.25 2.35 5.25 5.25v.75a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75v-.75z"/>
+                  <!-- Side bodies (outline suggestion of group) -->
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.5 19c0-2.1 1.44-3.95 3.17-4.57M20.5 19c0-2.1-1.44-3.95-3.17-4.57"/>
+                </svg>
+              </a>
+
+              <!-- Cars -->
+              <a href="manager_manage_cars.html"
+                 class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                 x-tooltip.placement.right="'Manage Cars'">
+                <!-- Replaced icon with a car icon (only change) -->
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="size-7"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 13h18l-1.5-4.5a2 2 0 0 0-1.9-1.4H6.4a2 2 0 0 0-1.9 1.4L3 13Z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 13v5a1 1 0 0 0 1 1h1.2a2 2 0 0 0 3.6 0h6.4a2 2 0 0 0 3.6 0H20a1 1 0 0 0 1-1v-5"/>
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6 13l1-3h10l1 3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M7.5 18h.01M16.5 18h.01"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Bottom Links -->
+            <div class="flex flex-col items-center space-y-3 py-3">
+              <!-- Settings -->
+              <a href="manager_edit_profile.html" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                <svg class="size-7" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-opacity="0.3" fill="currentColor" d="M2 12.947v-1.771c0-1.047.85-1.913 1.899-1.913 1.81 0 2.549-1.288 1.64-2.868a1.919 1.919 0 0 1 .699-2.607l1.729-.996c.79-.474 1.81-.192 2.279.603l.11.192c.9 1.58 2.379 1.58 3.288 0l.11-.192c.47-.795 1.49-1.077 2.279-.603l1.73.996a1.92 1.92 0 0 1 .699 2.607c-.91 1.58-.17 2.868 1.639 2.868 1.04 0 1.899.856 1.899 1.912v1.772c0 1.047-.85 1.912-1.9 1.912-1.808 0-2.548 1.288-1.638 2.869.52.915.21 2.083-.7 2.606l-1.729.997c-.79.473-1.81.191-2.279-.604l-.11-.191c-.9-1.58-2.379-1.58-3.288 0l-.11.19c-.47.796-1.49 1.078-2.279.605l-1.73-.997a1.919 1.919 0 0 1-.699-2.606c.91-1.58.17-2.869-1.639-2.869A1.911 1.911 0 0 1 2 12.947Z"></path>
+                  <path fill="currentColor" d="M11.995 15.332c1.794 0 3.248-1.464 3.248-3.27 0-1.807-1.454-3.272-3.248-3.272-1.794 0-3.248 1.465-3.248 3.271 0 1.807 1.454 3.271 3.248 3.271Z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Panel -->
+        <div class="sidebar-panel">
+          <div class="flex h-full grow flex-col bg-white pl-[var(--main-sidebar-width)] dark:bg-navy-750">
+            <!-- Sidebar Panel Header -->
+            <div class="flex h-18 w-full items-center justify-between pl-4 pr-1">
+              <p class="text-base tracking-wider text-slate-800 dark:text-navy-100">
+                Dashboard
+              </p>
+              <button @click="$store.global.isSidebarExpanded = false" class="btn size-7 rounded-full p-0 text-primary hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:text-accent-light/80 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 xl:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Sidebar Panel Body -->
+            <div x-data="{expandedItem:null}" class="h-[calc(100%-4.5rem)] overflow-x-hidden pb-6" x-init="$el._x_simplebar = new SimpleBar($el);">
+              <ul class="flex flex-1 flex-col px-4 font-inter">
+                <li>
+                  <a x-data="navLink" class="flex py-2 text-xs+ tracking-wide outline-none transition-colors duration-300 ease-in-out text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
+                    Your dashboard gives you quick access to key information.
+                    View available cars, new booking details, recent users, and total revenue.
+                  </a>
+                </li>
+              </ul>
+
+              <ul class="flex flex-1 flex-col px-4 font-inter mt-4">
+                <li>
+                  <p class="py-2 text-xs+ tracking-wide text-slate-500 dark:text-navy-300">
+                    Today's Date: <span x-text="formattedDate"></span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Authentication & Profile Alpine Component -->
+      <script>
+        document.addEventListener('alpine:init', () => {
+          Alpine.data('sidebarUser', () => ({
+            userAvatar: '../images/avatar/avatar-12.jpg', // Default avatar
+            userName: 'Lyk-no-boss', // Using the provided username from metadata
+            userRole: 'Customer',
+            formattedDate: '',
+
+            init() {
+              // Format today's date
+              const now = new Date();
+              this.formattedDate = now.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+
+              // Check if user is logged in
+              this.checkUserAuth();
+
+              // Redirect to login if not authenticated
+              if (!this.isAuthenticated()) {
+                window.location.href = '../auth/sign_in.html';
+              }
+            },
+
+            checkUserAuth() {
+              const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+              if (currentUser && currentUser.id) {
+                // Set user information
+                this.userName = currentUser.firstName && currentUser.lastName ?
+                        `${currentUser.firstName} ${currentUser.lastName}` :
+                        (currentUser.username || 'Lyk-no-boss');
+
+                this.userRole = this.capitalizeFirstLetter(currentUser.role || 'Customer');
+
+                // Set avatar if available
+                if (currentUser.avatar &&
+                        currentUser.avatar !== 'null' &&
+                        currentUser.avatar !== 'undefined') {
+                  this.userAvatar = currentUser.avatar;
+                }
+              }
+            },
+
+            isAuthenticated() {
+              const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+              return !!currentUser.id;
+            },
+
+            capitalizeFirstLetter(string) {
+              return string.charAt(0).toUpperCase() + string.slice(1);
+            },
+
+            logout() {
+              // Clear user data from localStorage
+              localStorage.removeItem('currentUser');
+
+              // Redirect to login page
+              window.location.href = '../auth/sign_in.html';
+            }
+          }));
+        });
+      </script>
+
+      <!-- App Header Wrapper-->
+      <nav class="header before:bg-white dark:before:bg-navy-750 print:hidden">
+        <!-- App Header  -->
+        <div class="header-container relative flex w-full bg-white dark:bg-navy-750 print:hidden">
+          <!-- Header Items -->
+          <div class="flex w-full items-center justify-between">
+
+            <!-- Left: Sidebar Toggle Button -->
+            <div class="size-7">
+              <button class="menu-toggle ml-0.5 flex size-7 flex-col justify-center space-y-1.5 text-primary outline-none focus:outline-none dark:text-accent-light/80" :class="$store.global.isSidebarExpanded && 'active'" @click="$store.global.isSidebarExpanded = !$store.global.isSidebarExpanded">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+
+            <!-- Right: Header buttons -->
+            <div class="-mr-1.5 flex items-center space-x-2">
+
+
+
+              <!-- Dark Mode Toggle -->
+              <button @click="$store.global.isDarkModeEnabled = !$store.global.isDarkModeEnabled" class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                <svg x-show="$store.global.isDarkModeEnabled" x-transition:enter="transition-transform duration-200 ease-out absolute origin-top" x-transition:enter-start="scale-75" x-transition:enter-end="scale-100 static" class="size-6 text-amber-400" fill="currentColor" viewbox="0 0 24 24">
+                  <path d="M11.75 3.412a.818.818 0 01-.07.917 6.332 6.332 0 00-1.4 3.971c0 3.564 2.98 6.494 6.706 6.494a6.86 6.86 0 002.856-.617.818.818 0 011.1 1.047C19.593 18.614 16.218 21 12.283 21 7.18 21 3 16.973 3 11.956c0-4.563 3.46-8.31 7.925-8.948a.818.818 0 01.826.404z"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" x-show="!$store.global.isDarkModeEnabled" x-transition:enter="transition-transform duration-200 ease-out absolute origin-top" x-transition:enter-start="scale-75" x-transition:enter-end="scale-100 static" class="size-6 text-amber-400" viewbox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                </svg>
+              </button>
+
+              <!-- Monochrome Mode Toggle -->
+              <button @click="$store.global.isMonochromeModeEnabled = !$store.global.isMonochromeModeEnabled" class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                <i class="fa-solid fa-palette bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-lg font-semibold text-transparent"></i>
+              </button>
+
+              <!-- Right Sidebar home page icon -->
+              <button
+                      @click="window.location.href = '../all_users/homepage.html'; $store.global.isRightSidebarExpanded = true"
+                      class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5.5 text-slate-500 dark:text-navy-100" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+      <!-- Main Content Wrapper -->
+      <main class="main-content w-full pb-8" x-data=>
+
+        <div class="mt-4 grid grid-cols-12 gap-4 px-[var(--margin-x)] transition-all duration-[.25s] sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
+
+
+          <div class="card col-span-12 mt-12 bg-slate-150 p-5 dark:bg-navy-700 sm:mt-0 sm:flex-row"
+               x-data="userWelcome()">
+            <div class="flex justify-center sm:order-last">
+
+            </div>
+            <div class="mt-2 flex-1 pt-2 text-center text-slate-700 dark:text-navy-100 sm:mt-0 sm:text-left">
+              <h3 class="text-xl">
+                Welcome back, <span class="font-semibold" x-text="fullName"></span>
+              </h3>
+              <p class="mt-2 leading-relaxed">
+                Ready to manage your fleet and bookings for today?
+              </p>
+              <p>Your business is running <span class="font-semibold">smoothly!</span></p>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener('alpine:init', () => {
+              Alpine.data('userWelcome', () => ({
+                fullName: 'User',
+                init() {
+                  const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                  if (currentUser && currentUser.firstName && currentUser.lastName) {
+                    this.fullName = `${currentUser.firstName} ${currentUser.lastName}`;
+                  }
+                }
+              }));
+            });
+          </script>
+
+          <div class="col-span-12 lg:col-span-8">
+            <div class="flex items-center justify-between space-x-2">
+              <h2 class="text-base font-medium tracking-wide text-slate-800 line-clamp-1 dark:text-navy-100">
+                Sales Overview
+              </h2>
+            </div>
+
+            <div x-data="{
+    totalIncome: 'GH₵ 0.00',
+    totalProfit: 0,
+    percentageChange: '0.0%',
+    isPositiveChange: true,
+    monthlyRevenue: [],
+    monthlyLabels: [],
+    monthlyProfit: [],
+    async init() {
+      try {
+        const response = await fetch('/api/bookings');
+        if (!response.ok) throw new Error('Failed to fetch bookings');
+        const bookings = await response.json();
+
+        // Only approved bookings
+        const approvedBookings = bookings.filter(booking => booking.status === 'Approved');
+
+        // Group bookings by month and sum all approved incomes and profits
+        let total = 0;
+        let totalProfit = 0;
+        const bookingsByMonth = {};
+        approvedBookings.forEach(booking => {
+          const pickupDate = new Date(booking.pickupDate);
+          if (isNaN(pickupDate.getTime())) return;
+          const year = pickupDate.getFullYear();
+          const month = pickupDate.getMonth() + 1;
+          const key = `${year}-${month}`;
+
+          if (!bookingsByMonth[key]) {
+            bookingsByMonth[key] = {
+              count: 0,
+              totalAmount: 0,
+              monthName: pickupDate.toLocaleString('default', { month: 'long' }),
+              year: year,
+              profit: 0
+            };
+          }
+
+          const days = this.calculateDays(booking.pickupDate, booking.dropoffDate);
+          const amount = days * booking.pricePerDay;
+          total += amount;
+
+          bookingsByMonth[key].count += 1;
+          bookingsByMonth[key].totalAmount += amount;
+          bookingsByMonth[key].profit += 1; // Each booking = 1 profit
+          totalProfit += 1;
+        });
+
+        // Prepare data for chart
+        const sortedMonths = Object.entries(bookingsByMonth)
+          .sort(([keyA], [keyB]) => {
+            const [yearA, monthA] = keyA.split('-').map(Number);
+            const [yearB, monthB] = keyB.split('-').map(Number);
+            return yearA === yearB ? monthA - monthB : yearA - yearB;
+          });
+
+        this.monthlyRevenue = sortedMonths.map(([_, data]) => data.totalAmount);
+        this.monthlyLabels = sortedMonths.map(([_, data]) => `${data.monthName.substr(0, 3)} ${data.year}`);
+        this.monthlyProfit = sortedMonths.map(([_, data]) => data.profit);
+
+        // Calculate percentage change for chart arrow (optional, can leave as demo or recalculate)
+        let percentageChange = 0;
+        let isPositiveChange = true;
+        const length = this.monthlyRevenue.length;
+        if (length > 1 && this.monthlyRevenue[length-2] > 0) {
+          percentageChange = ((this.monthlyRevenue[length-1] - this.monthlyRevenue[length-2]) / this.monthlyRevenue[length-2]) * 100;
+          isPositiveChange = percentageChange >= 0;
+          percentageChange = Math.abs(percentageChange).toFixed(1);
+        }
+        this.percentageChange = `${percentageChange}%`;
+        this.isPositiveChange = isPositiveChange;
+
+        // Set total income
+        this.totalIncome = `GH₵ ${total.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })}`;
+        // Set total profit
+        this.totalProfit = totalProfit;
+
+        // Update chart data (analyticsSalesOverview)
+        if (window.pages && window.pages.charts) {
+          // Revenue chart
+          if (window.pages.charts.analyticsSalesOverview) {
+            window.pages.charts.analyticsSalesOverview.updateOptions({
+              series: [{
+                name: 'Revenue',
+                data: this.monthlyRevenue
+              }],
+              labels: this.monthlyLabels
+            });
+          }
+          // Profit chart (number of bookings per month)
+          if (window.pages.charts.analyticsProfitOverview) {
+            window.pages.charts.analyticsProfitOverview.updateOptions({
+              series: [{
+                name: 'Profit (Bookings)',
+                data: this.monthlyProfit
+              }],
+              labels: this.monthlyLabels
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error calculating total income:', error);
+      }
+    },
+    calculateDays(start, end) {
+      if (!start || !end) return 0;
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) return 0;
+      const diffTime = endDate - startDate;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays > 0 ? diffDays : 0;
+    }
+  }" x-init="init()">
+              <div class="flex flex-col sm:flex-row sm:space-x-7">
+                <!-- REMOVED: Total Income and Booking Profit Display Section -->
+
+                <!-- Responsive container: chart will not overflow, will scroll horizontally if needed -->
+                <div class="ax-transparent-gridline w-full overflow-x-auto">
+                  <div style="min-width:600px;max-width:100vw;">
+                    <!-- Chart for Revenue -->
+                    <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.analyticsSalesOverview); $el._x_chart.render() });"></div>
+                  </div>
+                  <div style="min-width:600px;max-width:100vw;margin-top:32px;">
+                    <!-- New Chart for Profit (number of bookings per month) -->
+                    <div x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.analyticsProfitOverview); $el._x_chart.render() });"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-span-12 lg:col-span-4">
+            <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-2">
+              <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                <div x-data="{
+  totalCancelledCount: 0,
+  async init() {
+    try {
+      const response = await fetch('/api/bookings');
+      if (!response.ok) throw new Error('Failed to fetch bookings');
+      const bookings = await response.json();
+
+      // Count total cancelled bookings
+      let count = 0;
+      bookings.forEach(booking => {
+        if (booking.status === 'Cancelled') {
+          count += 1;
+        }
+      });
+
+      this.totalCancelledCount = count;
+    } catch (error) {
+      console.error('Error calculating cancelled bookings count:', error);
+    }
+  }
+}" x-init="init()">
+                  <div class="flex justify-between space-x-1">
+                    <p class="text-xl font-semibold text-slate-700 dark:text-navy-100" x-text="totalCancelledCount">
+                      0
+                    </p>
+                    <!-- Changed to a cancel icon (cross in circle) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-error dark:text-error" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                      <line x1="15" y1="9" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <line x1="9" y1="9" x2="15" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <p class="mt-1 text-xs+">Total Cancelled Bookings</p>
+              </div>
+
+              <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                <div x-data="{
+  approvedCount: 0,
+  async init() {
+    try {
+      const response = await fetch('/api/bookings');
+      if (!response.ok) throw new Error('Failed to fetch bookings');
+      const bookings = await response.json();
+      // Count only approved bookings
+      this.approvedCount = bookings.filter(b => b.status === 'Approved').length;
+    } catch (e) {
+      this.approvedCount = 0;
+    }
+  }
+}" x-init="init()">
+                  <div class="flex justify-between">
+                    <p class="text-xl font-semibold text-slate-700 dark:text-navy-100" x-text="approvedCount">
+                      12
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-success" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <p class="mt-1 text-xs+">Approved</p>
+              </div>
+
+              <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                <div x-data="{
+  pendingCount: 0,
+  async init() {
+    try {
+      const response = await fetch('/api/bookings');
+      if (!response.ok) throw new Error('Failed to fetch bookings');
+      const bookings = await response.json();
+      // Count only pending bookings
+      this.pendingCount = bookings.filter(b => b.status === 'Pending').length;
+    } catch (e) {
+      this.pendingCount = 0;
+    }
+  }
+}" x-init="init()">
+                  <div class="flex justify-between">
+                    <p class="text-xl font-semibold text-slate-700 dark:text-navy-100" x-text="pendingCount">
+                      143
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-warning" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <p class="mt-1 text-xs+">Pending</p>
+              </div>
+
+              <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                <div x-data="{
+  totalCarCount: 0,
+  async init() {
+    try {
+      const response = await fetch('/api/cars');
+      if (!response.ok) throw new Error('Failed to fetch cars');
+      const cars = await response.json();
+      this.totalCarCount = Array.isArray(cars) ? cars.length : 0;
+    } catch (e) {
+      this.totalCarCount = 0;
+    }
+  }
+}" x-init="init()">
+                  <div class="flex justify-between">
+                    <p class="text-xl font-semibold text-slate-700 dark:text-navy-100" x-text="totalCarCount">
+                      651
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-info" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
+                    </svg>
+                  </div>
+                </div>
+                <p class="mt-1 text-xs+">Available Cars</p>
+              </div>
+
+              <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                <div x-data="{
+  rejectedCount: 0,
+  async init() {
+    try {
+      const response = await fetch('/api/bookings');
+      if (!response.ok) throw new Error('Failed to fetch bookings');
+      const bookings = await response.json();
+      this.rejectedCount = bookings.filter(b => b.status === 'Rejected').length;
+    } catch (e) {
+      this.rejectedCount = 0;
+    }
+  }
+}" x-init="init()">
+                  <div class="flex justify-between">
+                    <p class="text-xl font-semibold text-slate-700 dark:text-navy-100" x-text="rejectedCount">
+                      6
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-secondary" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                  </div>
+                </div>
+                <p class="mt-1 text-xs+">Rejected</p>
+              </div>
+
+              <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700">
+                <div x-data="{
+    totalUserCount: 0,
+    async init() {
+      try {
+        const response = await fetch('/admin/api/users');
+        if (!response.ok) throw new Error('Failed to fetch users');
+        const users = await response.json();
+
+        /* ================== ADDED FILTER ==================
+           Exclude any user whose role is 'Admin' (case-insensitive).
+           Count only Managers and Customers (or any non-admin role).
+        */
+        const filtered = Array.isArray(users)
+          ? users.filter(u => (u.role || '').toLowerCase() !== 'admin')
+          : [];
+
+        this.totalUserCount = filtered.length;
+      } catch (e) {
+        this.totalUserCount = 0;
+      }
+    }
+  }" x-init="init()">
+                  <div class="flex justify-between">
+                    <p class="text-xl font-semibold text-slate-700 dark:text-navy-100" x-text="totalUserCount">
+                      25
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-error" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <p class="mt-1 text-xs+">Total Users</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Recent Bookings -->
+        <div class="p-4 sm:p-5 lg:p-6" x-data="{
+          bookings: [],
+          filteredBookings: [],
+          paginatedBookings: [],
+          currentPage: 1,
+          entriesPerPage: 10,
+          totalPages: 1,
+          searchBookingsQuery: '',
+          isLoading: true,
+          userAvatars: {},
+
+          async init() {
+            await this.fetchUserAvatars();
+            await this.fetchBookings();
+            this.filterBookings();
+            this.updatePagination();
+          },
+
+          async fetchUserAvatars() {
+            try {
+              // Fetch all users to get their avatars
+              const response = await fetch('/api/users');
+              if (response.ok) {
+                const users = await response.json();
+                // Create a map of user IDs/emails to their avatars
+                users.forEach(user => {
+                  const key = user.id || user.email;
+                  if (key) {
+                    this.userAvatars[key] = user.avatar || user.profile_image || user.profileImage;
+                  }
+                });
+              }
+            } catch (error) {
+              console.error('Error fetching user avatars:', error);
+            }
+          },
+
+          async fetchBookings() {
+            try {
+              this.isLoading = true;
+              const response = await fetch('/api/bookings');
+
+              if (!response.ok) {
+                throw new Error('Failed to fetch bookings');
+              }
+
+              const bookingsData = await response.json();
+
+              // Format the bookings data for display
+              this.bookings = bookingsData.map(booking => {
+                // Calculate total amount
+                const pickupDate = new Date(booking.pickupDate);
+                const dropoffDate = new Date(booking.dropoffDate);
+                const days = Math.max(1, Math.ceil((dropoffDate - pickupDate) / (1000 * 60 * 60 * 24)));
+                const total = days * booking.pricePerDay;
+
+                // Get user avatar - try multiple possible sources
+                let userAvatar = '../images/avatar/default.jpg';
+
+                // Try to get the user avatar from the booking data first
+                if (booking.customerAvatar || booking.avatar) {
+                  userAvatar = booking.customerAvatar || booking.avatar;
+                }
+                // Try to get from our pre-loaded user avatars using various possible keys
+                else if (booking.userId && this.userAvatars[booking.userId]) {
+                  userAvatar = this.userAvatars[booking.userId];
+                }
+                else if (booking.userEmail && this.userAvatars[booking.userEmail]) {
+                  userAvatar = this.userAvatars[booking.userEmail];
+                }
+                else if (booking.customerEmail && this.userAvatars[booking.customerEmail]) {
+                  userAvatar = this.userAvatars[booking.customerEmail];
+                }
+                else if (booking.customerId && this.userAvatars[booking.customerId]) {
+                  userAvatar = this.userAvatars[booking.customerId];
+                }
+
+                return {
+                  id: booking.id,
+                  date: new Date(booking.created_at || booking.createdAt).toLocaleDateString(),
+                  name: booking.customerName || `${booking.firstName || ''} ${booking.lastName || ''}`.trim(),
+                  phone: booking.customerPhone || booking.phone || 'N/A',
+                  // avatar: userAvatar, // REMOVED USER AVATAR
+                  pickupDate: new Date(booking.pickupDate).toLocaleDateString(),
+                  dropoffDate: new Date(booking.dropoffDate).toLocaleDateString(),
+                  status: booking.status || 'Pending',
+                  carName: booking.carName || booking.car?.name || 'Unknown'
+                  // Removed total
+                };
+              });
+
+              this.filterBookings();
+            } catch (error) {
+              console.error('Error fetching bookings:', error);
+            } finally {
+              this.isLoading = false;
+            }
+          },
+
+          filterBookings() {
+            if (!this.searchBookingsQuery.trim()) {
+              this.filteredBookings = [...this.bookings];
+            } else {
+              const searchTerm = this.searchBookingsQuery.toLowerCase();
+              this.filteredBookings = this.bookings.filter(booking =>
+                booking.name.toLowerCase().includes(searchTerm) ||
+                booking.carName.toLowerCase().includes(searchTerm) ||
+                booking.status.toLowerCase().includes(searchTerm) ||
+                booking.phone.toLowerCase().includes(searchTerm)
+              );
+            }
+
+            this.updatePagination();
+          },
+
+          updatePagination() {
+            this.totalPages = Math.ceil(this.filteredBookings.length / this.entriesPerPage);
+            this.currentPage = Math.min(this.currentPage, this.totalPages || 1);
+
+            const startIndex = (this.currentPage - 1) * this.entriesPerPage;
+            const endIndex = startIndex + this.entriesPerPage;
+            this.paginatedBookings = this.filteredBookings.slice(startIndex, endIndex);
+          },
+
+          resetPage() {
+            this.currentPage = 1;
+            this.updatePagination();
+          }
+        }" x-init="init()" @keyup="filterBookings()">
+          <div class="col-span-12">
+            <div class="flex items-center justify-between py-5 lg:py-6">
+              <div class="flex items-center space-x-1">
+                <h2 class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-50 lg:text-2xl">
+                  Recent Bookings
+                </h2>
+              </div>
+
+              <div class="flex items-center space-x-2">
+                <label class="relative hidden sm:flex">
+                  <input
+                          x-model.debounce.300ms="searchBookingsQuery"
+                          class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                          placeholder="Search bookings..."
+                          type="text"
+                  >
+                  <span
+                          class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
+                  >
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="size-4 transition-colors duration-200"
+        fill="currentColor"
+        viewbox="0 0 24 24"
+>
+  <path
+          d="M3.316 13.781l.73-.171-.73.171zm0-5.457l.73.171-.73-.171zm15.473 0l.73-.171-.73.171zm0 5.457l.73.171-.73-.171zm-5.008 5.008l-.171-.73.171.73zm-5.457 0l-.171.73.171-.73zm0-15.473l-.171-.73.171.73zm5.457 0l.171-.73-.171.73zM20.47 21.53a.75.75 0 101.06-1.06l-1.06 1.06zM4.046 13.61a11.198 11.198 0 010-5.115l-1.46-.342a12.698 12.698 0 000 5.8l1.46-.343zm14.013-5.115a11.196 11.196 0 010 5.115l1.46.342a12.698 12.698 0 000-5.8l-1.46.343zm-4.45 9.564a11.196 11.196 0 01-5.114 0l-.342 1.46c1.907.448 3.892.448 5.8 0l-.343-1.46zM8.496 4.046a11.198 11.198 0 015.115 0l.342-1.46a12.698 12.698 0 00-5.8 0l.343 1.46zm0 14.013a5.97 5.97 0 01-4.45-4.45l-1.46.343a7.47 7.47 0 005.568 5.568l.342-1.46zm5.457 1.46a7.47 7.47 0 005.568-5.567l-1.46-.342a5.97 5.97 0 01-4.45 4.45l.342 1.46zM13.61 4.046a5.97 5.97 0 014.45 4.45l1.46-.343a7.47 7.47 0 00-5.568-5.567l-.342 1.46zm-5.457-1.46a7.47 7.47 0 00-5.567 5.567l1.46.342a5.97 5.97 0 014.45-4.45l-.343-1.46zm8.652 15.28l3.665 3.664 1.06-1.06-3.665-3.665-1.06 1.06z"
+  />
+</svg>
+</span>
+                </label>
+              </div>
+            </div>
+            <div class="card mt-3">
+              <div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+                <!-- Loading indicator -->
+                <div x-show="isLoading" class="flex justify-center items-center py-12">
+                  <div class="animate-spin size-10 rounded-full border-4 border-primary/30 border-t-primary"></div>
+                </div>
+
+                <table x-show="!isLoading" class="is-hoverable w-full text-left">
+                  <thead>
+                  <tr>
+                    <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                      Date
+                    </th>
+                    <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                      Customer Name
+                    </th>
+                    <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                      Pick Up Date
+                    </th>
+                    <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                      Drop off Date
+                    </th>
+                    <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                      Booking Status
+                    </th>
+                    <th class="whitespace-nowrap rounded-tr-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                      Car Name
+                    </th>
+                    <!-- Removed Total Header -->
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <template x-for="booking in paginatedBookings" :key="booking.id">
+                    <tr class="border-y border-transparent border-b-slate-200 dark:border-b-navy-500">
+                      <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                        <p class="font-medium" x-text="booking.date"></p>
+                      </td>
+                      <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                        <div class="flex items-center space-x-4">
+
+                          <div class="flex flex-col">
+                            <span class="font-medium text-slate-700 dark:text-navy-100" x-text="booking.name"></span>
+                            <span class="text-xs text-slate-500 dark:text-navy-300" x-text="booking.phone"></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-4 py-3 sm:px-5" x-text="booking.pickupDate"></td>
+                      <td class="whitespace-nowrap px-4 py-3 sm:px-5" x-text="booking.dropoffDate"></td>
+                      <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                        <div class="badge" :class="{
+                            'bg-warning/10 text-warning dark:bg-warning/15': booking.status === 'Pending',
+                            'bg-success/10 text-success dark:bg-success/15': booking.status === 'Approved',
+                            'bg-error/10 text-error dark:bg-error/15': booking.status === 'Rejected'
+                        }" x-text="booking.status"></div>
+                      </td>
+                      <td class="whitespace-nowrap px-4 py-3 sm:px-5" x-text="booking.carName"></td>
+                      <!-- Removed Total Cell -->
+                    </tr>
+                  </template>
+
+                  <!-- Empty state -->
+                  <tr x-show="!isLoading && paginatedBookings.length === 0" class="border-y border-transparent">
+                    <td colspan="6" class="px-4 py-8 text-center text-sm+ text-slate-500 dark:text-navy-200">
+                      No bookings found. Try adjusting your search criteria.
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="flex flex-col justify-between space-y-4 px-4 py-4 sm:flex-row sm:items-center sm:space-y-0 sm:px-5">
+                <div class="flex items-center space-x-2 text-xs+">
+                  <span>Show</span>
+                  <label class="block">
+                    <select x-model="entriesPerPage" @change="resetPage()" class="form-select rounded-full border border-slate-300 bg-white px-2 py-1 pr-6 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+                      <option>10</option>
+                      <option>30</option>
+                      <option>50</option>
+                    </select>
+                  </label>
+                  <span>entries</span>
+                </div>
+
+                <ol class="pagination">
+                  <li class="rounded-l-lg bg-slate-150 dark:bg-navy-500">
+                    <button @click="if (currentPage > 1) currentPage--; updatePagination()" :disabled="currentPage === 1" class="flex size-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-300 focus:bg-slate-300 active:bg-slate-300/80 dark:text-navy-200 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90" :class="{'opacity-50 cursor-not-allowed': currentPage === 1}">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                  </li>
+                  <template x-for="page in Array.from({ length: totalPages }, (_, i) => i + 1)" :key="page">
+                    <li class="bg-slate-150 dark:bg-navy-500">
+                      <button @click="currentPage = page; updatePagination()" class="flex h-8 min-w-[2rem] items-center justify-center rounded-lg px-3 leading-tight transition-colors" :class="{'bg-primary text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90': page === currentPage, 'hover:bg-slate-300 focus:bg-slate-300 active:bg-slate-300/80 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90': page !== currentPage}">
+                        <span x-text="page"></span>
+                      </button>
+                    </li>
+                  </template>
+                  <li class="rounded-r-lg bg-slate-150 dark:bg-navy-500">
+                    <button @click="if (currentPage < totalPages) currentPage++; updatePagination()" :disabled="currentPage === totalPages" class="flex size-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-300 focus:bg-slate-300 active:bg-slate-300/80 dark:text-navy-200 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90" :class="{'opacity-50 cursor-not-allowed': currentPage === totalPages}">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                  </li>
+                </ol>
+
+                <div class="text-xs+">
+                  Showing <span x-text="Math.min((currentPage - 1) * entriesPerPage + 1, filteredBookings.length)"></span> to <span x-text="Math.min(currentPage * entriesPerPage, filteredBookings.length)"></span> of <span x-text="filteredBookings.length"></span> entries
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Bookings Return -->
+        <div
+                class="mt-4 px-[var(--margin-x)] transition-all duration-[.25s] sm:mt-5 lg:mt-6"
+                x-data="{
+    bookings: [],
+    isLoading: true,
+    now: new Date(),
+
+    async init() {
+      await this.fetchBookings();
+    },
+    async fetchBookings() {
+      try {
+        this.isLoading = true;
+        const response = await fetch('/api/bookings');
+        if (!response.ok) {
+          throw new Error('Failed to fetch bookings');
+        }
+        const bookingsData = await response.json();
+
+        // Only keep bookings whose next available date is in the future
+        // AND status is NOT 'Cancelled' and NOT 'Rejected'
+        this.bookings = bookingsData
+          .map(booking => {
+            // Car image, name, dropoff date
+            const carImage = booking.carImage || (booking.car && booking.car.image) || '../images/cars/default.jpg';
+            const carName = booking.carName || (booking.car && booking.car.name) || 'Unknown';
+
+            // Compute next available date (the day after dropoff date)
+            const dropoffRaw = booking.dropoffDate || booking.dropoff_date;
+            const dropoffTime = booking.dropoffTime || booking.dropoff_time || '12:00';
+
+            let dropoffDateObj = new Date(dropoffRaw);
+            // If time exists, set it
+            if (dropoffTime) {
+              const [hh, mm] = dropoffTime.split(':');
+              dropoffDateObj.setHours(Number(hh), Number(mm), 0, 0);
+            }
+            // Next available date: day after dropoff
+            let nextAvailableDateObj = new Date(dropoffDateObj.getTime() + 24 * 60 * 60 * 1000);
+
+            // Format date
+            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const day = nextAvailableDateObj.getDate();
+            const month = months[nextAvailableDateObj.getMonth()];
+            const year = nextAvailableDateObj.getFullYear();
+            const formattedDate = `${day} ${month}, ${year}`;
+
+            return {
+              carImage,
+              carName,
+              nextAvailableDateObj,
+              formattedDate,
+              status: booking.status || ''
+            };
+          })
+          .filter(b => b.nextAvailableDateObj > this.now && b.status !== 'Cancelled' && b.status !== 'Rejected');
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
+        this.bookings = [];
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  }"
+                x-init="init()"
+        >
+          <div class="flex items-center space-x-1">
+            <p class="text-sm+ text-slate-500 dark:text-navy-300">
+              .        </p>
+          </div>
+          <div class="flex items-center space-x-1">
+            <h2 class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-50 lg:text-2xl">
+              Recent Bookings
+            </h2>
+          </div>
+
+          <div class="flex items-center space-x-1">
+            <p class="text-sm+ text-slate-500 dark:text-navy-300">
+              .        </p>
+          </div>
+
+          <div class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
+            <template x-if="isLoading">
+              <div class="col-span-full flex justify-center py-10">
+                <div class="animate-spin size-12 rounded-full border-4 border-primary/30 border-t-primary"></div>
+              </div>
+            </template>
+            <template x-for="booking in bookings" :key="booking.carImage + booking.carName + booking.formattedDate">
+              <div class="flex flex-col">
+                <img class="h-44 w-full rounded-2xl object-cover object-center" :src="booking.carImage" alt="image">
+                <div class="card -mt-8 grow rounded-2xl p-4">
+                  <div>
+                    <a href="#" class="text-sm+ font-medium text-slate-700 line-clamp-1 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light"
+                       x-text="booking.carName"></a>
+                  </div>
+                  <p class="mt-2 grow line-clamp-3">
+                    This car has been booked. Check below for the next available date.
+                  </p>
+                  <div class="mt-4 flex items-center justify-between">
+                    <a href="#" class="flex items-center space-x-2 text-xs hover:text-slate-800 dark:hover:text-navy-100">
+                      <span class="line-clamp-1">Next available booking date</span>
+                    </a>
+                    <p class="flex shrink-0 items-center space-x-1.5 text-slate-400 dark:text-navy-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                      <span class="text-xs" x-text="booking.formattedDate"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <template x-if="!isLoading && bookings.length === 0">
+              <div class="col-span-full card rounded-2xl p-4 bg-white dark:bg-navy-700 shadow-lg flex flex-col items-center justify-center text-center py-16">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-slate-400 dark:text-navy-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h3 class="mt-4 text-xl font-semibold text-slate-700 dark:text-navy-100">No Bookings</h3>
+                <p class="mt-2 text-slate-500 dark:text-navy-300">All cars are available for booking.</p>
+              </div>
+            </template>
+          </div>
+        </div>
+
+
+
+        <div class="p-4 sm:p-5 lg:p-6" x-data="{
+  searchUsersQuery: '',
+  recentUsers: [],
+  isLoadingRecent: true,
+  errorRecent: null,
+  async init() {
+    try {
+      this.isLoadingRecent = true;
+      const response = await fetch('/admin/api/recent-users');
+      if (!response.ok) throw new Error('Failed to fetch recent users');
+      const data = await response.json();
+      // Show only 9 recent users (EXCLUDING ADMINS)  <<-- CHANGED
+      this.recentUsers = data
+        .filter(user => (user.role || 'Customer').toLowerCase() !== 'admin') // ADDED FILTER TO REMOVE ADMINS
+        .slice(0, 9)
+        .map(user => ({
+          id: user.id,
+          name: user.first_name + ' ' + user.last_name,
+          phone: user.phone || '',
+          avatar: user.avatar || '../images/avatar/default.jpg',
+          role: user.role || 'Customer',
+          online: user.online || false
+        }));
+    } catch (error) {
+      console.error('Error loading recent users:', error);
+      this.errorRecent = 'Could not load recent users';
+      this.recentUsers = [];
+    } finally {
+      this.isLoadingRecent = false;
+    }
+  },
+  get filteredRecentUsers() {
+    if (this.searchUsersQuery === '') return this.recentUsers;
+    const search = this.searchUsersQuery.toLowerCase();
+    return this.recentUsers.filter(user =>
+      user.name.toLowerCase().includes(search) ||
+      user.phone.toLowerCase().includes(search) ||
+      user.role.toLowerCase().includes(search)
+    );
+  }
+}" x-init="init()">
+          <div class="flex items-center justify-between py-5 lg:py-6">
+            <div class="flex items-center space-x-1">
+              <h2 class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-50 lg:text-2xl">
+                Recent Users
+              </h2>
+            </div>
+            <div class="flex items-center space-x-2">
+              <label class="relative hidden sm:flex">
+                <input
+                        x-model.debounce.300ms="searchUsersQuery"
+                        class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                        placeholder="Search users..."
+                        type="text">
+                <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-colors duration-200" fill="currentColor" viewbox="0 0 24 24">
+            <path d="M3.316 13.781l.73-.171-.73.171zm0-5.457l.73.171-.73-.171zm15.473 0l.73-.171-.73.171zm0 5.457l.73.171-.73.171zm-5.008 5.008l-.171-.73.171.73zm-5.457 0l-.171.73.171-.73zm0-15.473l-.171-.73.171.73zm5.457 0l.171-.73-.171.73zM20.47 21.53a.75.75 0 101.06-1.06l-1.06 1.06zM4.046 13.61a11.198 11.198 0 010-5.115l-1.46-.342a12.698 12.698 0 000 5.8l1.46-.343zm14.013-5.115a11.196 11.196 0 010 5.115l1.46.342a12.698 12.698 0 000-5.8l-1.46.343zm-4.45 9.564a11.196 11.196 0 01-5.114 0l-.342 1.46c1.907.448 3.892.448 5.8 0l-.343-1.46zM8.496 4.046a11.198 11.198 0 015.115 0l.342-1.46a12.698 12.698 0 00-5.8 0l.343 1.46zm0 14.013a5.97 5.97 0 01-4.45-4.45l-1.46.343a7.47 7.47 0 005.568 5.568l.342-1.46zm5.457 1.46a7.47 7.47 0 005.568-5.567l-1.46-.342a5.97 5.97 0 01-4.45 4.45l.342 1.46zM13.61 4.046a5.97 5.97 0 014.45 4.45l1.46-.343a7.47 7.47 0 00-5.568-5.567l-.342 1.46zm-5.457-1.46a7.47 7.47 0 00-5.567 5.567l1.46.342a5.97 5.97 0 014.45-4.45l-.343-1.46zm8.652 15.28l3.665 3.664 1.06-1.06-3.665-3.665-1.06 1.06z"/>
+          </svg>
+        </span>
+              </label>
+            </div>
+          </div>
+          <div x-show="isLoadingRecent" class="flex justify-center items-center py-6">
+            <div class="animate-spin size-10 rounded-full border-4 border-primary/30 border-t-primary"></div>
+          </div>
+          <div x-show="errorRecent" class="p-4 text-error text-center" x-text="errorRecent"></div>
+          <div x-show="!isLoadingRecent && !errorRecent && filteredRecentUsers.length === 0" class="p-4 text-slate-400 text-center">No recent users found.</div>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6" x-show="!isLoadingRecent && !errorRecent && filteredRecentUsers.length > 0">
+            <template x-for="user in filteredRecentUsers" :key="user.id">
+              <div class="card flex-row justify-between space-x-2 p-4 sm:p-5">
+                <div>
+                  <div class="flex space-x-1">
+                    <h4 class="text-base font-medium text-slate-700 line-clamp-1 dark:text-navy-100" x-text="user.name"></h4>
+                    <span class="badge" :class="{
+                'bg-error/10 text-error dark:bg-error/15': user.role === 'admin',
+                'bg-success/10 text-success dark:bg-success/15': user.role === 'manager',
+                'bg-warning/10 text-warning dark:bg-warning/15': user.role === 'customer'
+              }" x-text="user.role"></span>
+                  </div>
+                  <p class="text-xs+ transition-colors duration-300 ease-in-out text-slate-500 dark:text-navy-300" x-text="user.phone"></p>
+                </div>
+                <div class="avatar size-10">
+                  <img class="mask is-squircle" :src="user.avatar" alt="avatar">
+                  <div x-show="user.online" class="absolute right-0 -m-0.5 size-3 rounded-full border-2 border-white bg-primary dark:border-navy-700 dark:bg-accent"></div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <div id="x-teleport-target"></div>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => Alpine.start());
+    </script>
+  </body>
+</html>
